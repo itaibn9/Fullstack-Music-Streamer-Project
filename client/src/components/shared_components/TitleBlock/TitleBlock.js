@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './TitleBlock.css';
-import like_logo from '../songRow/like_logo.png';
+// import like_logo from '../songRow/like_logo.png';
 import { useLocation  } from "react-router-dom";
 import axios from 'axios';
 
@@ -8,8 +8,7 @@ import axios from 'axios';
 
 
 function TitleBlock() {
-    let location = useLocation();
-    location = location.pathname.split('/');
+    const [location, setLocation] = useState(useLocation().pathname.split('/'));
     const [titleData, setTitleData] = useState([]);
     useEffect(() => {
         (async () => {
@@ -21,11 +20,10 @@ function TitleBlock() {
             console.log(error);
           }
         })();
-      }, []);
-      console.log(titleData);
+      }, [location]);
     return (
         <div className="titleBlock">
-            <img className="cover_img" src={titleData.cover_img} />
+            <img className="cover_img" src={titleData.cover_img} alt="wallpaper" />
             <div className="title_info">
                 <div> {location[1]} Name: {titleData.name}</div>
                 <div>{titleData.created_at ? "Created At: " + titleData.created_at :  titleData.artist_name ? "Artist Name: " +  titleData.artist_name : null}</div>

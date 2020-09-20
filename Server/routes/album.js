@@ -14,6 +14,17 @@ router.get('/:id', async (req, res) => {
     });
 });
 
+router.get('/:id/list-of-songs', async (req, res) => {
+    const query = `CALL GetAlbumSongList(${req.params.id});`
+    connection.query(query, (error, results, fields) => {
+        if (error) {
+            res.send(error.message);
+            throw error;
+        };
+        res.send(results);
+    });
+});
+
 router.put('/:id', async (req, res) => {
     const query = newQuery('putById', 'album', req.body, req.params.id)
     connection.query(query, (error, results, fields) => {

@@ -1,17 +1,23 @@
-import React, { Component ,useState, useEffect } from 'react'
-import albumImg from '../TitleBlock/album_img.png';
+import React, { useState, useEffect } from 'react'
 import Carousel from 'react-elastic-carousel';
-import { Link } from "react-router-dom";
+import { Link ,useLocation } from "react-router-dom";
 import axios from 'axios';
 
 function SquareRow({table, page}) {
-    const [details, setDetails] = useState([]);
+  const [location, setLocation] = useState(useLocation().pathname.split('/'));
+  const [details, setDetails] = useState([]);
     useEffect(() => {
         (async () => {
           try {
-            const { data } = await axios.get(`/top/${table}`);
-            console.log(data);
-            setDetails(data);
+            if(location[1]==='artist'){
+              const { data } = await axios.get(`/${location[1]}/${location[2]}/list-of-albums`);
+              console.log(data);
+              setDetails(data[0])
+            } else {
+              const { data } = await axios.get(`/top/${table}`);
+              console.log(data);
+              setDetails(data);
+            }
           } catch (error) {
             console.log(error);
           }
