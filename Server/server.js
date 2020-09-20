@@ -23,8 +23,8 @@ function logger (req, res, next) {
  app.use('/artist', artistRouter);
 
 // ALL GET REQUESTS FOR TOP Limit
-app.get('/top_songs/',(req, res) => {
-    const query = newQuery('top', 'song',topLimit);
+app.get('/top/:table',(req, res) => {
+    const query = `SELECT ${req.params.table}_id AS id, ${req.params.table}_name, cover_img FROM ${req.params.table} ORDER BY likes LIMIT ${topLimit};`
     connection.query(query, (error, results, fields) => {
         if(error){
             console.log(error);

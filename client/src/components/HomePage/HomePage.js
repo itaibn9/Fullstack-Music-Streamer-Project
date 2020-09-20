@@ -9,19 +9,19 @@ function HomePage() {
     </div>
     <div className="homePage__topTen">
     <h2>Top 10 Songs</h2>
-    <SquareRow />
+    <SquareRow table={'song'} page={'song'} />
     </div>
     <div className="homePage__topTen">
     <h2>Top 10 Playlists</h2>
-    <SquareRow />
+    <SquareRow table={'playlist'}  page={'playlist'}/>
     </div>
     <div className="homePage__topTen">
     <h2>Top 10 Albums</h2>
-    <SquareRow />
+    <SquareRow table={'album'}  page={'album'}/>
     </div>
     <div className="homePage__topTen">
     <h2>Top 10 Artists</h2>
-    <SquareRow />
+    <SquareRow table={'artist'}  page={'artist'}/>
     </div>
 </div>
   );

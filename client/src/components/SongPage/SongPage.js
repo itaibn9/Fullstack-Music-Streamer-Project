@@ -35,16 +35,19 @@ function SongPage() {
     }
 ]]);
 
-  useEffect(async () => {
-    try{
-    const { data } = await axios.get('/song/3');
-    console.log(data);
-    setSong(data[0]);
-    } catch(error) {
+useEffect(() => {
+  (async () => {
+    try {
+      const { data } = await axios.get('/song/3');
+      console.log(data);
+      setSong(data[0]);
+    } catch (error) {
       console.log(error);
-      throw(error);
     }
-  }, [])
+  })();
+}, []);
+
+
     return (
       <div className="songPage">
         <div className="songPage__song">
