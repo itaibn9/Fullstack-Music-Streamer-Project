@@ -1,38 +1,41 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import './TitleBlock.css';
-import albumImg from './album_img.png';
 import like_logo from '../songRow/like_logo.png';
-import { Link, useRouteMatch } from "react-router-dom";
+import { Link, useRouteMatch, useLocation, useHistory, useParams  } from "react-router-dom";
+import axios from 'axios';
 
-const albumDetials = {
-    id: '1',
-    name:'Dark side of the moon',
-    youtubeLink: '944y9HlLmqw',
-    artist_name: 'eminem',
-    songs:'13',
-    uploaded_at:"2002-05-17",
-    length: "1 Hour ,15 minutes"
-};
 
 
 
 function TitleBlock() {
-    let match = useRouteMatch();
+    let location = useLocation();
+    location = location.pathname.split('/');
+    const [titleData, setTitleData] = useState([]);
+    useEffect(() => {
+        (async () => {
+          try {
+            const { data } = await axios.get(`/${location[1]}/${location[2]}`);
+            console.log(data);
+            setTitleData(data[0][0]);
+          } catch (error) {
+            console.log(error);
+          }
+        })();
+      }, []);
+      console.log(titleData);
     return (
         <div className="titleBlock">
-            <img className="album_img" src={albumImg} alt="album image" />
-            <div className="album_info">
-                <p>{albumDetials.name} - {albumDetials.uploaded_at}
-                <br></br>
-                {albumDetials.songs} - {albumDetials.length}
-                </p>
+            <img className="cover_img" src={titleData.cover_img} />
+            <div className="title_info">
+                <div> {location[1]} Name: {titleData.name}</div>
+                <div>{titleData.created_at ? "Created At: " + titleData.created_at :  titleData.artist_name ? "Artist Name: " +  titleData.artist_name : null}</div>
             </div>
-            <div className="control_links">
-            <Link to={`/song/${albumDetials.youtubeLink}?${match.url}=${albumDetials.id}`}>
+            {/* <div className="control_links">
+            <Link to={`/song/${location[2]}`}>
                 <button>Play</button>
             </Link>
             <button><img className="control__logo" src={like_logo} alt="like" /></button>
-            </div>
+            </div> */}
         </div>
     )
 }

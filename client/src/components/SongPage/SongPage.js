@@ -22,30 +22,20 @@ function SongPage() {
   const onReady = (event) => {
     event.target.pauseVideo();
   }
-  const [song, setSong] = useState([[
-    {
-        "song_id": 2,
-        "song_name": "My Name Is",
-        "album_id": 1,
-        "artist_id": 1,
-        "lyric": "blablabla blablabla blablabla blablabla blablabla blablabla blablabla",
-        "youtube_link": "sNPnbI1arSE",
-        "upload_at": "2009-06-18T21:00:00.000Z",
-        "length": "04:08:00"
-    }
-]]);
+  let { id } = useParams();
+  const [song, setSong] = useState([]);
 
 useEffect(() => {
   (async () => {
     try {
-      const { data } = await axios.get('/song/3');
+      const { data } = await axios.get(`/song/${id}`);
       console.log(data);
       setSong(data[0]);
     } catch (error) {
       console.log(error);
     }
   })();
-}, []);
+}, );
 
 
     return (

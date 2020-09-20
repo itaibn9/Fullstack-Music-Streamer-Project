@@ -36,44 +36,6 @@ app.get('/top/:table',(req, res) => {
     });
 });
 
-app.get('/top_artists/',(req, res) => {
-    const query = newQuery('top', 'artist',topLimit);
-    connection.query(query, (error, results, fields) => {
-        if(error){
-            console.log(error);
-            res.status(500).send({
-                error: 'Server is on updating please try later'
-              });
-        };
-        res.send(results);
-    });
-});
-
-app.get('/top_albums/',(req, res) => {
-    const query = newQuery('top', 'album',topLimit);
-    connection.query(query, (error, results, fields) => {
-        if(error){
-            console.log(error);
-            res.status(500).send({
-                error: 'Server is on updating please try later'
-              });
-        };
-        res.send(results);
-    });
-});
-
-app.get('/top_playlists/',(req, res) => {
-    const query = newQuery('top', 'playlist',topLimit);
-    connection.query(query, (error, results, fields) => {
-        if(error){
-            console.log(error);
-            res.status(500).send({
-                error: 'Server is on updating please try later'
-              });
-        };
-        res.send(results);
-    });
-});
 
 
 app.listen(8080, () => {

@@ -4,7 +4,7 @@ const connection = require('../connection')
 const newQuery = require('./querySelector');
 
 router.get('/:id', async (req, res) => {
-    const query = newQuery('getById', 'artist','',req.params.id);
+    const query = `CALL GetArtistDetails(${req.params.id});`
     connection.query(query, (error, results, fields) => {
         if (error) {
             res.send(error.message);
