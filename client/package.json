@@ -23,7 +23,7 @@
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
-    "extends": "react-app"
+    "extends": "client"
   },
   "browserslist": {
     "production": [
@@ -48,12 +48,12 @@
   "main": ".eslintrc.js",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/itaibn9/music-app.git"
+    "url": "git+https://github.com/itaibn9/fullstack-streamer.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/itaibn9/music-app/issues"
+    "url": "https://github.com/itaibn9/fullstack-streamer/issues"
   },
-  "homepage": "https://github.com/itaibn9/music-app#readme"
+  "homepage": "https://github.com/itaibn9/fullstack-streamer"
 }
