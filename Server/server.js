@@ -38,6 +38,7 @@ app.get('/top/:table',(req, res) => {
 
 
 
+
 app.listen(8080, () => {
     console.log('The server runs on port 8080');
 })
