@@ -1,0 +1,31 @@
+@import url("https://fonts.googleapis.com/css2?family=Righteous&display=swap");
+@import url(//db.onlinewebfonts.com/c/4aa3e37e571255737e5e6d4e9d9770a5?family=Rockwell);
+@import url("https://fonts.googleapis.com/css2?family=Righteous&display=swap");
+@import url(//db.onlinewebfonts.com/c/4aa3e37e571255737e5e6d4e9d9770a5?family=Rockwell);
+.homePage {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-rows: 1fr 3fr 3fr 3fr 3fr;
+      grid-template-rows: 1fr 3fr 3fr 3fr 3fr;
+  background-color: #1E1D1D;
+}
+
+.homePage__Welcome {
+  width: 100%;
+  font-family: "Righteous", cursive;
+  font-size: 2rem;
+  font-weight: 300;
+  color: white;
+  text-align: center;
+  margin-top: 35px;
+}
+
+.homePage__topTen {
+  width: 100%;
+  font-family: "Righteous", cursive;
+  font-size: 2rem;
+  font-weight: 300;
+  color: white;
+  background-color: #746868;
+}
+/*# sourceMappingURL=HomePage.css.map */

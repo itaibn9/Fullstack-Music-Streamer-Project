@@ -1,0 +1,40 @@
+@import '../../variables';
+@import '../../mixins';
+
+.songPage{
+    display: grid;
+    grid-template-columns: 3fr 2fr;
+    background-color: $background-color;
+    height: 130vh;
+    &__song{
+      
+      @include flex(column, space-evenly, center);
+    }
+    &__Info{
+      width: 50%;
+      @include details-text;
+    }
+    &__rightBlock{
+    
+      @include flex(column, center, center);
+    }
+    &__label{
+      width: 100%;
+      @include flex(row, space-between, center);
+    }
+    &__control{
+      width: 50%;
+      background-color: $block-color-primary;
+      position: relative;
+      top:2rem;
+    }
+    button{
+      &:hover{
+        cursor: pointer;
+      }
+      background: none;
+      border: none;
+    }
+}
+
+

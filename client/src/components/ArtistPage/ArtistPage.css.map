@@ -1,0 +1,12 @@
+{
+    "version": 3,
+    "mappings": "ACAA,OAAO,CAAC,sEAAI;AACZ,OAAO,CAAC,+EAAI;AADZ,OAAO,CAAC,sEAAI;AACZ,OAAO,CAAC,+EAAI;ADEZ,AAAA,WAAW,CAAA;EACP,gBAAgB,ECGI,OAAO;EDF3B,MAAM,EAAE,KAAK;EACb,OAAO,EAAE,IAAI;EACb,kBAAkB,EAAE,OAAO;EEW3B,OAAO,EAAE,IAAI;EACb,cAAc,EFXA,MAAM;EEYpB,eAAe,EFZO,UAAU;EEahC,WAAW,EFbuB,MAAM;CAC3C",
+    "sources": [
+        "ArtistPage.scss",
+        "../../_variables.scss",
+        "../../_mixins.scss",
+        "../../_variables.scss"
+    ],
+    "names": [],
+    "file": "ArtistPage.css"
+}

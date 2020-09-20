@@ -1,0 +1,20 @@
+@import '../../variables';
+@import '../../mixins';
+
+.homePage{
+    display: grid;
+    grid-template-rows: 1fr 3fr 3fr 3fr 3fr;
+    background-color: $background-color;
+    &__Welcome{
+        width: 100%;
+        @include details-text;
+        text-align: center;
+        margin-top: 35px;
+    }
+    &__topTen{
+        width: 100%;
+        @include details-text;
+        background-color: $block-color-secondary;
+    }
+}
+

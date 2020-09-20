@@ -1,0 +1,12 @@
+{
+    "version": 3,
+    "mappings": "ACAA,OAAO,CAAC,sEAAI;AACZ,OAAO,CAAC,+EAAI;AADZ,OAAO,CAAC,sEAAI;AACZ,OAAO,CAAC,+EAAI;ADEZ,AAAA,WAAW,CAAA;EAEP,UAAU,EAAC,UAAU;CAGxB",
+    "sources": [
+        "TitleBlock.scss",
+        "../../../_variables.scss",
+        "../../../_mixins.scss",
+        "../../../_variables.scss"
+    ],
+    "names": [],
+    "file": "TitleBlock.css"
+}

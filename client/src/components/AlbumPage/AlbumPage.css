@@ -1,0 +1,26 @@
+@import url("https://fonts.googleapis.com/css2?family=Righteous&display=swap");
+@import url(//db.onlinewebfonts.com/c/4aa3e37e571255737e5e6d4e9d9770a5?family=Rockwell);
+@import url("https://fonts.googleapis.com/css2?family=Righteous&display=swap");
+@import url(//db.onlinewebfonts.com/c/4aa3e37e571255737e5e6d4e9d9770a5?family=Rockwell);
+.albumPage {
+  background-color: #746868;
+  height: 130vh;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-rows: 1fr 2fr;
+      grid-template-rows: 1fr 2fr;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+/*# sourceMappingURL=AlbumPage.css.map */

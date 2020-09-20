@@ -1,0 +1,10 @@
+@import '../../variables';
+@import '../../mixins';
+
+.artistPage{
+    background-color: $block-color-secondary;
+    height: 130vh;
+    display: grid;
+    grid-template-rows: 1fr 2fr;
+    @include flex(column, flex-start, center);
+}

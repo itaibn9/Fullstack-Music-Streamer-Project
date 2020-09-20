@@ -1,0 +1,11 @@
+@import '../../../variables';
+@import '../../../mixins';
+.songRow{
+    background-color: $block-color-primary;
+    @include flex(row, space-evenly, center);
+    width: 100%;
+    @include song-text;
+}
+p{
+    @include details-text;
+}
