@@ -1,12 +1,13 @@
 @import '../../variables';
 @import '../../mixin';
 
-.page404{
-    display: grid;
-    background-color: $background-color;
-}
-.mainbox {
+.notfoundPage {
     background-color: #95c2de;
+    padding-top: 300px;
+
+  }
+  
+  .mainbox {
     margin: auto;
     height: 600px;
     width: 600px;
@@ -21,15 +22,14 @@
       left: 20%;
       top: 8%;
     }
-  
-  .far {
-    position: absolute;
-    font-size: 8.5rem;
-    left: 42%;
-    top: 15%;
-    color: #ffffff;
-  }
-  
+    .err1{
+        color: #ffffff;
+        font-family: 'Nunito Sans', sans-serif;
+        font-size: 11rem;
+        position:absolute;
+        left: 43%;
+        top: 8%;
+    }
    .err2 {
       color: #ffffff;
       font-family: 'Nunito Sans', sans-serif;
@@ -49,13 +49,11 @@
       width: 75%;
     }
   
-  a {
+    .linkToHome {
     text-decoration: none;
-    color: white;
+    color: black;
   }
   
-  a:hover {
+  .linkToHome:hover {
     text-decoration: underline;
   }
-
-

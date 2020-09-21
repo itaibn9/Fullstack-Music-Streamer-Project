@@ -2,14 +2,12 @@
 @import url(//db.onlinewebfonts.com/c/4aa3e37e571255737e5e6d4e9d9770a5?family=Rockwell);
 @import url("https://fonts.googleapis.com/css2?family=Righteous&display=swap");
 @import url(//db.onlinewebfonts.com/c/4aa3e37e571255737e5e6d4e9d9770a5?family=Rockwell);
-.page404 {
-  display: -ms-grid;
-  display: grid;
-  background-color: #1E1D1D;
+.notfoundPage {
+  background-color: #95c2de;
+  padding-top: 300px;
 }
 
 .mainbox {
-  background-color: #95c2de;
   margin: auto;
   height: 600px;
   width: 600px;
@@ -25,12 +23,13 @@
   top: 8%;
 }
 
-.far {
-  position: absolute;
-  font-size: 8.5rem;
-  left: 42%;
-  top: 15%;
+.err1 {
   color: #ffffff;
+  font-family: 'Nunito Sans', sans-serif;
+  font-size: 11rem;
+  position: absolute;
+  left: 43%;
+  top: 8%;
 }
 
 .err2 {
@@ -52,12 +51,12 @@
   width: 75%;
 }
 
-a {
+.linkToHome {
   text-decoration: none;
-  color: white;
+  color: black;
 }
 
-a:hover {
+.linkToHome:hover {
   text-decoration: underline;
 }
-/*# sourceMappingURL=Page404.css.map */
+/*# sourceMappingURL=NotFoundPage.css.map */
