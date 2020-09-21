@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.css';
 import SongPage from './components/SongPage/SongPage';
-import { BrowserRouter as Router, Route, Switch} from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch, Redirect} from "react-router-dom";
 import SearchPage from './components/SearchPage/SearchPage';
 import NavBar from './components/NavBar/NavBar';
 import Page404 from './components/page404/Page404';
@@ -20,7 +20,8 @@ function App() {
         <Route path="/artist/:id"><ArtistPage /></Route>
         <Route path="/playlist/:id"><PlaylistPage /></Route> 
         <Route path="/search"><SearchPage /></Route>
-        <Route render={Page404} /> 
+        <Route path="/404"><Page404 /></Route>
+        <Redirect to="/404" />
       </Switch>
     </Router>
   );

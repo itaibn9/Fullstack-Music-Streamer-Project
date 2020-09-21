@@ -7,7 +7,6 @@
     min-width:165px;
     width: 100%;
     position: absolute;
-    white-space: nowrap;
     @include flex(row, space-between,center);
     &__container{
         @include flex(row, center, center);

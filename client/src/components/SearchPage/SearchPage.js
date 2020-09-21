@@ -3,12 +3,13 @@ import SquareRow from '../shared_components/SqaureRow/SquareRow';
 import './SearchPage.css';
 function SearchPage() {
 const [searchInput, setSearchInput] = useState("");
+
     const filterBySearch = (title) => {
         setSearchInput(title);
       };
 
 
-console.log(searchInput);
+
 
     return (
         <div className="searchPage">
