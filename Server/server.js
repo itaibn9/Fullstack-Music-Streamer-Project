@@ -22,9 +22,23 @@ function logger (req, res, next) {
  app.use('/playlist', playlistRouter);
  app.use('/artist', artistRouter);
 
-// ALL GET REQUESTS FOR TOP Limit
+// GET REQUEST FOR TOP Limit
 app.get('/top/:table',(req, res) => {
     const query = `SELECT ${req.params.table}_id AS id, ${req.params.table}_name, cover_img FROM ${req.params.table} ORDER BY likes LIMIT ${topLimit};`
+    connection.query(query, (error, results, fields) => {
+        if(error){
+            console.log(error);
+            res.status(500).send({
+                error: 'Server is on updating please try later'
+              });
+        };
+        res.send(results);
+    });
+});
+// GET REQUEST FOR Search
+app.get('/search/:table/:searchInput',(req, res) => {
+    const query = `SELECT ${req.params.table}_id AS id, ${req.params.table}_name, cover_img FROM ${req.params.table}
+     WHERE ${req.params.table}_name LIKE "%${req.params.searchInput}%" ORDER BY likes LIMIT ${topLimit};`
     connection.query(query, (error, results, fields) => {
         if(error){
             console.log(error);

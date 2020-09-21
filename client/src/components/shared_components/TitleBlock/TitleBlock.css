@@ -6,10 +6,10 @@
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-orient: vertical;
+  -webkit-box-orient: horizontal;
   -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
+      -ms-flex-direction: row;
+          flex-direction: row;
   -webkit-box-pack: start;
       -ms-flex-pack: start;
           justify-content: flex-start;
@@ -29,6 +29,11 @@
   font-weight: 300;
   color: white;
   font-size: 1rem;
-  padding-top: 30px;
+  padding-left: 20px;
+}
+
+.cover_img {
+  border-radius: 10px;
+  width: 300px;
 }
 /*# sourceMappingURL=TitleBlock.css.map */

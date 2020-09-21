@@ -5,13 +5,14 @@
 .songRow {
   display: -ms-grid;
   display: grid;
-  -ms-grid-columns: 1fr 2fr 2fr 1fr 2fr;
-      grid-template-columns: 1fr 2fr 2fr 1fr 2fr;
+  -ms-grid-columns: 1fr 2fr 2fr 0.2fr 1fr;
+      grid-template-columns: 1fr 2fr 2fr 0.2fr 1fr;
   width: 100%;
   font-family: "Righteous", cursive;
   font-size: 1rem;
   font-weight: 100;
   color: white;
+  text-align: center;
 }
 
 p {
@@ -23,11 +24,11 @@ p {
   text-align: center;
 }
 
-.control_logo {
+.control__logo {
   -webkit-box-sizing: content-box;
           box-sizing: content-box;
   height: 20px;
-  width: 10px;
+  width: 20px;
   border-radius: 100px;
   padding: 5px;
 }

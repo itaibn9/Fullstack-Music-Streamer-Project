@@ -13,15 +13,15 @@ function HomePage() {
     </div>
     <div className="homePage__topTen">
     <h2>Top 10 Playlists</h2>
-    <SquareRow table={'playlist'}  page={'playlist'}/>
+    <SquareRow table={'playlist'}  page={'playlist'} />
     </div>
     <div className="homePage__topTen">
     <h2>Top 10 Albums</h2>
-    <SquareRow table={'album'}  page={'album'}/>
+    <SquareRow table={'album'}  page={'album'} />
     </div>
     <div className="homePage__topTen">
     <h2>Top 10 Artists</h2>
-    <SquareRow table={'artist'}  page={'artist'}/>
+    <SquareRow table={'artist'}  page={'artist'} />
     </div>
 </div>
   );

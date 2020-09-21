@@ -9,6 +9,7 @@ import axios from 'axios';
 function ArtistPage() {
     const [location, setLocation] = useState(useLocation().pathname.split('/'));
     const [listOfSongs, setListOfSongs] = useState([]);
+
     useEffect(() => {
         (async () => {
           try {
@@ -20,10 +21,12 @@ function ArtistPage() {
           }
         })();
       }, [location]);
+
     return (
         <div className="artistPage">
             <TitleBlock />
-            <SquareRow table={'artist'} page={'album'} />
+            {listOfSongs[0]===undefined ? null :
+            <SquareRow table={'artist'} page={'album'} />}
             <div className="list_of_songs">
             { listOfSongs[0]===undefined ?   <h1>No songs To this Artist</h1> :
             listOfSongs.map((song) => <SongRow name={song.name} length={song.length} artist={song.artist_name} songID={song.song_id} type={location[1]} typeID={location[2]} />)  }

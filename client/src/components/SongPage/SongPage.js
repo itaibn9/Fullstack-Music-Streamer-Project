@@ -9,7 +9,7 @@ import axios from 'axios';
 
 const opts = {
     height: '390',
-    width: '640',
+    width: '500',
     playerVars: {
       autoplay: 1,
     },
@@ -19,6 +19,7 @@ const opts = {
 function SongPage() {
   const [location, setLocation] = useState(useLocation());
   const [song, setSong] = useState([]);
+  const [uploadedDate, setUploadedDate] = useState();
   const [relatedSongs, setRelatedSongs] = useState([]);
   const [refreshPage, setRefreshPage] = useState(false);
   const onReady = (event) => {
@@ -37,6 +38,11 @@ useEffect(() => {
             console.log(moreSongs.data);
             setRelatedSongs(moreSongs.data[0])
       }
+      const fullDate = new Date(data[0].upload_at).getFullYear() +
+      "-" +  new Date(data[0].upload_at).getMonth() + "-" +
+      new Date(data[0].upload_at).getDay();
+      setUploadedDate(fullDate)
+      console.log(data);
       setSong(data[0]);
     } catch (error) {
       console.log(error);
@@ -54,6 +60,10 @@ const refresh = () => {
         <div className="songPage__song">
         <Youtube videoId={song.youtube_link} opts={opts} onReady={onReady} />
         <div className="songPage__Info">
+        <div className="songPage__label">
+         <span>Song Name:</span>
+        <span>{song.song_name}</span>
+         </div>
             <div className="songPage__label">
          <span>Artist Name:</span>
         <span>{song.artist_name}</span>
@@ -64,16 +74,18 @@ const refresh = () => {
          </div>
          <div className="songPage__label">
          <span>uploaded At:</span>
-        <span>{song.upload_at}</span>
+        <span>{uploadedDate}</span>
          </div>
          <div className="songPage__label">
-         <span>lyric:</span>
-        <span>{song.lyric}</span>
+         <button className="lyricButton" onClick={()=> alert(song.lyric)}>
+           <span>Lyrics</span>
+           </button>
          </div>
           </div>
         </div>
         <div className="songPage__rightBlock">
-        { relatedSongs[0]===undefined ?   <h1>No songs related to this song</h1> :
+          <h2 className="relatedSongHeader">Related Songs</h2>
+        { relatedSongs[0]===undefined ?   <h1 className="relatedSongHeader">No songs related to this song</h1> :
             relatedSongs.map((song) =>
             <SongRow key={song.name} name={song.name} length={song.length} artist={song.artist_name}
              songID={song.song_id} type={location.search.split('?')[1].split('=')[0]} typeID={location.search.split('?')[1].split('=')[1]} refresh={refresh} />)  }
