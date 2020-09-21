@@ -8,24 +8,33 @@ function SquareRow({table, page, searchBy}) {
   const [location, setLocation] = useState(useLocation().pathname.split('/'));
   const [details, setDetails] = useState([]);
   const [searchQuery, setSearchQuery] = useState();
-  if(searchBy!==undefined&&searchBy!==""&&searchBy!==searchQuery) setSearchQuery(searchBy);
+  const [letterCounter, setLetterCounter] = useState(0);
+  console.log(`=====${letterCounter}============${searchQuery}-----------------${searchBy}=================`);
+  if(searchBy!==undefined&&searchBy!==""&&searchBy!==searchQuery){
+    setSearchQuery(searchBy);
+  } else if(letterCounter!==0&&searchBy===searchQuery) {
+    setSearchQuery();
+    setLetterCounter(0);
+  }
 
     useEffect(() => {
         (async () => {
           try {
+            console.log(location[1]);
             if(location[1]==='artist'){
               const { data } = await axios.get(`/${location[1]}/${location[2]}/list-of-albums`);
               console.log(data);
               setDetails(data[0])
             } else if(searchQuery!==undefined&&searchBy!==""){
-              console.log("fafdfadfafdsf");
+              console.log(`------------------------------${table}---------------------------${searchQuery}-----`)
               const { data } = await axios.get(`/search/${table}/${searchQuery}`);
-              setDetails(data);
-            } else {
-              console.log(searchBy);
-              const { data } = await axios.get(`/top/${table}`);
               console.log(data);
               setDetails(data);
+              setLetterCounter(1)
+            } else {
+              const { data } = await axios.get(`/top/${table}`);
+              setDetails(data);
+              console.log(data);
             }
           } catch (error) {
             console.log(error);
