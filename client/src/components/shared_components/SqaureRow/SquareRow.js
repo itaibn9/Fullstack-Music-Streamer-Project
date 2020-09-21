@@ -26,7 +26,7 @@ function SquareRow({table, page}) {
 
     return (
         <Carousel  itemsToScroll={4} itemsToShow={4}>
-            {details.map((item) => <Link className="topLink" to={`/${page}/${item.id}`}><img className="square_img" src={item.cover_img} alt={`${table}`} /></Link> )}
+            {details.map((item) => <Link key={item.id} className="topLink" to={`/${page}/${item.id}`}><img className="square_img" src={item.cover_img} alt={`${table}`} /></Link> )}
             </Carousel>
     )
 }

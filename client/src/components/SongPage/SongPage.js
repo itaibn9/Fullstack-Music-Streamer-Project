@@ -1,12 +1,10 @@
 import React, {useState, useEffect} from 'react';
 import Youtube from 'react-youtube';
-import { useParams } from "react-router-dom";
+import { useParams, useLocation } from "react-router-dom";
 import './SongPage.css';
-import left_Logo from './left_logo.png';
-import shuffle_Logo from './shuffle_logo.png';
-import right_Logo from './right_logo.png';
 import SongRow from '../shared_components/songRow/SongRow';
 import axios from 'axios';
+
 
 
 const opts = {
@@ -19,23 +17,36 @@ const opts = {
 
 
 function SongPage() {
+  const [location, setLocation] = useState(useLocation());
+  const [song, setSong] = useState([]);
+  const [relatedSongs, setRelatedSongs] = useState([]);
+  const [refreshPage, setRefreshPage] = useState(false);
   const onReady = (event) => {
     event.target.pauseVideo();
   }
-  let { id } = useParams();
-  const [song, setSong] = useState([]);
+  const { id } = useParams();
+
 
 useEffect(() => {
   (async () => {
     try {
       const { data } = await axios.get(`/song/${id}`);
-      console.log(data);
+      if(location.search!==""){
+         const  type = location.search.split('?')[1].split('=');
+           const  moreSongs  =  await axios.get(`/${type[0]}/${type[1]}/list-of-songs`);
+            console.log(moreSongs.data);
+            setRelatedSongs(moreSongs.data[0])
+      }
       setSong(data[0]);
     } catch (error) {
       console.log(error);
     }
   })();
-}, );
+}, [refreshPage]);
+
+const refresh = () => {
+  refreshPage ? setRefreshPage(false) : setRefreshPage(true);
+};
 
 
     return (
@@ -62,12 +73,10 @@ useEffect(() => {
           </div>
         </div>
         <div className="songPage__rightBlock">
-          <div className="songPage__control">
-              <button><img className="control__logo" src={left_Logo} alt="previous_song" /></button>
-              <button><img className="control__logo" src={shuffle_Logo} alt="previous_song" /></button>
-              <button><img className="control__logo" src={right_Logo} alt="previous_song" /></button>
-          </div>
-         <SongRow />
+        { relatedSongs[0]===undefined ?   <h1>No songs related to this song</h1> :
+            relatedSongs.map((song) =>
+            <SongRow key={song.name} name={song.name} length={song.length} artist={song.artist_name}
+             songID={song.song_id} type={location.search.split('?')[1].split('=')[0]} typeID={location.search.split('?')[1].split('=')[1]} refresh={refresh} />)  }
         </div>
       </div>
     );

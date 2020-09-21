@@ -26,7 +26,7 @@ function AlbumPage() {
             <TitleBlock />
             <div className="list_of_songs">
             { listOfSongs[0]===undefined ?   <h1>No songs in the album</h1> :
-            listOfSongs.map((song) => <SongRow name={song.name} length={song.length} artist={song.artist_name} songID={song.song_id} />)  }
+            listOfSongs.map((song) => <SongRow key={song.name} name={song.name} length={song.length} artist={song.artist_name} songID={song.song_id} type={location[1]} typeID={location[2]} />)  }
         </div>
         </div>
     )

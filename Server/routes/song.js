@@ -2,7 +2,7 @@ const express = require('express');
 const app =express();
 const router = express.Router();
 const connection = require('../connection')
-
+const relatedSongsquery = require('./querySelector');
 app.use(express.json());
 
 router.get('/:id', async (req, res) => {
@@ -15,6 +15,18 @@ router.get('/:id', async (req, res) => {
         };
         res.send(results);
     });
+});
+
+router.get('/:table/typeID', async (req, res) => {
+    console.log(req.params.table + "---" + req.params.typeID);
+const query = relatedSongsquery(req.params.table, req.params.typeID);
+connection.query(query, (error, results, fields) => {
+    if (error) {
+        res.send(error.message);
+        throw error;
+    };
+    res.send(results);
+});
 });
 
 router.put('/:id', async (req, res) => {
