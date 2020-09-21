@@ -13,7 +13,7 @@ function SongRow({name, length, artist, songID, type, typeID, refresh}) {
            </Link>
             <p>{name}</p>
             <p>{artist}</p>
-           <button><img className="control__logo" src={like_logo} alt="like" /></button>
+           <button onClick={() => alert("In development..")}><img className="control__logo" src={like_logo} alt="like" /></button>
             <p>{length}</p>
         </div>
     )

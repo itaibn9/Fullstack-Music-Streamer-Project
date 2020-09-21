@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import Carousel from 'react-elastic-carousel';
 import { Link ,useLocation } from "react-router-dom";
 import axios from 'axios';
+import './SquareRow.css';
 
 function SquareRow({table, page}) {
   const [location, setLocation] = useState(useLocation().pathname.split('/'));
@@ -25,9 +26,11 @@ function SquareRow({table, page}) {
       }, []);
 
     return (
+      <div className="SquareRow">
         <Carousel  itemsToScroll={4} itemsToShow={4}>
             {details.map((item) => <Link key={item.id} className="topLink" to={`/${page}/${item.id}`}><img className="square_img" src={item.cover_img} alt={`${table}`} /></Link> )}
             </Carousel>
+            </div>
     )
 }
 

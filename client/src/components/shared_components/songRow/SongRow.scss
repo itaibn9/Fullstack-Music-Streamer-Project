@@ -1,11 +1,21 @@
 @import '../../../variables';
-@import '../../../mixins';
+@import '../../../mixin';
 .songRow{
-    background-color: $block-color-primary;
-    @include flex(row, space-evenly, center);
+    
+    display: grid;
+    grid-template-columns: 1fr 2fr 2fr 1fr 2fr; 
     width: 100%;
     @include song-text;
 }
 p{
     @include details-text;
+    font-size: 1rem;
+    text-align: center;
+}
+.control_logo{
+    box-sizing: content-box;
+    height: 20px;
+    width: 10px;
+    border-radius: 100px;
+    padding: 5px;
 }

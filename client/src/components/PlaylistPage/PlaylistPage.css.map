@@ -4,7 +4,7 @@
     "sources": [
         "PlaylistPage.scss",
         "../../_variables.scss",
-        "../../_mixins.scss",
+        "../../_mixin.scss",
         "../../_variables.scss"
     ],
     "names": [],

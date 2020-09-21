@@ -3,7 +3,32 @@
 @import url("https://fonts.googleapis.com/css2?family=Righteous&display=swap");
 @import url(//db.onlinewebfonts.com/c/4aa3e37e571255737e5e6d4e9d9770a5?family=Rockwell);
 .titleBlock {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
   -ms-flex-item-align: start;
       align-self: flex-start;
+  padding-top: 150px;
+  padding-bottom: 50px;
+  padding-left: 20px;
+}
+
+.title_info {
+  font-family: "Righteous", cursive;
+  font-size: 2rem;
+  font-weight: 300;
+  color: white;
+  font-size: 1rem;
+  padding-top: 30px;
 }
 /*# sourceMappingURL=TitleBlock.css.map */
