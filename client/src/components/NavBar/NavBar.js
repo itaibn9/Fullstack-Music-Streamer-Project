@@ -14,12 +14,12 @@ function NavBar() {
                 <div className="navbar__line" />
                 </div>
                 <div className="navbar__container">
-              <Link className="navbar__links" to="/search">Search</Link>      
-                <Link  className="navbar__links" to="/add">Add</Link>
+              <Link className="navbar__links" to="/api/search">Search</Link>      
+                <Link  className="navbar__links" to="/api/add">Add</Link>
                 </div>
                 <div className="navbar__container">
                 <div className="navbar__line" />
-                <Link  className="navbar__links navbar__links--end" to="/profile">
+                <Link  className="navbar__links navbar__links--end" to="/api/profile">
                 <img className="navbar__logo" src={person} alt="person-logo"></img>
                 <p>Hello Itay</p>
                     </Link>

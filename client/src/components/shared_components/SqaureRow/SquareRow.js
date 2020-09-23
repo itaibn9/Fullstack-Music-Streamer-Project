@@ -22,17 +22,17 @@ function SquareRow({table, page, searchBy}) {
           try {
             console.log(location[1]);
             if(location[1]==='artist'){
-              const { data } = await axios.get(`/${location[1]}/${location[2]}/list-of-albums`);
+              const { data } = await axios.get(`/api/${location[2]}/${location[3]}/list-of-albums`);
               console.log(data);
               setDetails(data[0])
             } else if(searchQuery!==undefined&&searchBy!==""){
               console.log(`------------------------------${table}---------------------------${searchQuery}-----`)
-              const { data } = await axios.get(`/search/${table}/${searchQuery}`);
+              const { data } = await axios.get(`/api/search/${table}/${searchQuery}`);
               console.log(data);
               setDetails(data);
               setLetterCounter(1)
             } else {
-              const { data } = await axios.get(`/top/${table}`);
+              const { data } = await axios.get(`/api/top/${table}`);
               setDetails(data);
               console.log(data);
             }
@@ -45,7 +45,7 @@ function SquareRow({table, page, searchBy}) {
     return (
       <div className="SquareRow">
         <Carousel  itemsToScroll={4} itemsToShow={4}>
-            {details.map((item) => <Link key={item.name+"-"+item.id} className="topLink" to={`/${page}/${item.id}`}>
+            {details.map((item) => <Link key={item.name+"-"+item.id} className="topLink" to={`/api/${page}/${item.id}`}>
               <img className="square_img" src={item.cover_img} alt={`${table}`} />
               <p>{item.name}</p></Link>)}
             </Carousel>

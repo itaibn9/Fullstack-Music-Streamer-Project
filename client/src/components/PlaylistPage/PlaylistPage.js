@@ -12,7 +12,7 @@ function PlaylistPage() {
     useEffect(() => {
         (async () => {
           try {
-            const { data } = await axios.get(`/playlist/${location[2]}/list-of-songs`);
+            const { data } = await axios.get(`/api/playlist/${location[3]}/list-of-songs`);
             console.log(data);
             setListOfSongs(data[0]);
           } catch (error) {
@@ -25,7 +25,8 @@ function PlaylistPage() {
         <TitleBlock />
         <div className="list_of_songs">
             { listOfSongs[0]===undefined ?   <h1>No songs in the playlist</h1> :
-            listOfSongs.map((song) => <SongRow name={song.name} length={song.length} artist={song.artist_name} songID={song.song_id} type={location[1]} typeID={location[2]} />)  }
+            listOfSongs.map((song) => <SongRow name={song.name} length={song.length} artist={song.artist_name}
+             songID={song.song_id} type={location[2]} typeID={location[3]} />)  }
         </div>
     </div>
     )

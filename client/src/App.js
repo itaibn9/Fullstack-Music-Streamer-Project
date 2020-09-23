@@ -15,11 +15,11 @@ function App() {
       <NavBar />   
     <Switch>
     <Route exact={true} path="/" render={() => <HomePage />}></Route>
-        <Route path="/song/:id" render={() => <SongPage />}></Route>
-        <Route path="/album/:id"><AlbumPage /></Route>
-        <Route path="/artist/:id"><ArtistPage /></Route>
-        <Route path="/playlist/:id"><PlaylistPage /></Route> 
-        <Route path="/search"><SearchPage /></Route>
+        <Route path="/api/song/:id" render={() => <SongPage />}></Route>
+        <Route path="/api/album/:id"><AlbumPage /></Route>
+        <Route path="/api/artist/:id"><ArtistPage /></Route>
+        <Route path="/api/playlist/:id"><PlaylistPage /></Route> 
+        <Route path="/api/search"><SearchPage /></Route>
         <Route path='/404' component={NotFoundPage} />
         <Redirect from='*' to='/404' /> 
       </Switch>

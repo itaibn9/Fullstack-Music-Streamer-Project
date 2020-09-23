@@ -8,7 +8,7 @@ function SongRow({name, length, artist, songID, type, typeID, refresh}) {
 
     return (
         <div className="songRow">
-            <Link className="play_logo" to={`/song/${songID}?${type}=${typeID}`}>
+            <Link className="play_logo" to={`/api/song/${songID}?${type}=${typeID}`}>
            <button onClick ={() => refresh ? refresh() : null}><img className="control__logo" src={play_logo} alt="play" /></button>
            </Link>
             <p>{name}</p>

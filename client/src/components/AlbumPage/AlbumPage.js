@@ -12,7 +12,7 @@ function AlbumPage() {
     useEffect(() => {
         (async () => {
           try {
-            const { data } = await axios.get(`/album/${location[2]}/list-of-songs`);
+            const { data } = await axios.get(`/album/${location[3]}/list-of-songs`);
             console.log(data);
             setListOfSongs(data[0]);
           } catch (error) {
@@ -26,7 +26,8 @@ function AlbumPage() {
             <TitleBlock />
             <div className="list_of_songs">
             { listOfSongs[0]===undefined ?   <h1>No songs in the album</h1> :
-            listOfSongs.map((song) => <SongRow key={song.name} name={song.name} length={song.length} artist={song.artist_name} songID={song.song_id} type={location[1]} typeID={location[2]} />)  }
+            listOfSongs.map((song) => <SongRow key={song.name} name={song.name} length={song.length} artist={song.artist_name}
+             songID={song.song_id} type={location[2]} typeID={location[3]} />)  }
         </div>
         </div>
     )

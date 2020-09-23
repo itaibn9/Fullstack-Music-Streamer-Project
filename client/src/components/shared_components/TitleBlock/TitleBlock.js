@@ -14,7 +14,7 @@ function TitleBlock() {
     useEffect(() => {
         (async () => {
           try {
-            const { data } = await axios.get(`/${location[1]}/${location[2]}`);
+            const { data } = await axios.get(`/api/${location[2]}/${location[3]}`);
             console.log(data);
             setCreatedYear(new Date(data[0][0].created_at).getFullYear())
             setTitleData(data[0][0]);
@@ -27,7 +27,7 @@ function TitleBlock() {
         <div className="titleBlock">
             <img className="cover_img" src={titleData.cover_img} alt="wallpaper" />
             <div className="title_info">
-                <div> {location[1]} Name: {titleData.name}</div>
+                <div> {location[2]} Name: {titleData.name}</div>
                 <div>{titleData.created_at ? "Created At: " + createdYear :  titleData.artist_name ? "Artist Name: " +  titleData.artist_name : null}</div>
             </div>
             {/* <div className="control_links">
