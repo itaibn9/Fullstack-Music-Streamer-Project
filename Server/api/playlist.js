@@ -65,7 +65,7 @@ const { playlist } = require('../models');
 
 const router = Router();
 
-router.get('/', async (req, res) => {
+router.get('/top/', async (req, res) => {
   const allPlaylists = await playlist.findAll();
   res.json(allPlaylists)
 })

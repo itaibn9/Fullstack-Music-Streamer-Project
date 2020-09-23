@@ -32,7 +32,7 @@ function SquareRow({table, page, searchBy}) {
               setDetails(data);
               setLetterCounter(1)
             } else {
-              const { data } = await axios.get(`/api/top/${table}`);
+              const { data } = await axios.get(`/api/${table}/top/`);
               setDetails(data);
               console.log(data);
             }

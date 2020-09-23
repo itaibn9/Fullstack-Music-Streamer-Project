@@ -73,9 +73,21 @@ const { song } = require('../models');
 
 const router = Router();
 
-router.get('/', async (req, res) => {
+router.get('/top/', async (req, res) => {
   const allSongs = await song.findAll();
   res.json(allSongs)
 })
+
+// router.get('/:id', async (req, res) => {
+//     const query = `SELECT song_name, lyric,youtube_link, upload_at ,length, artist.artist_name, song.likes
+//      FROM song JOIN artist ON song.artist_id=artist.artist_id  WHERE song.song_id=${req.params.id};`
+//     connection.query(query, (error, results, fields) => {
+//         if (error) {
+//             res.send(error.message);
+//             throw error;
+//         };
+//         res.send(results);
+//     });
+// });
 
 module.exports = router;

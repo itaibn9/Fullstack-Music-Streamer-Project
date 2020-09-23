@@ -65,7 +65,7 @@ const { album } = require('../models');
 
 const router = Router();
 
-router.get('/', async (req, res) => {
+router.get('/top/', async (req, res) => {
   const allAlbums = await album.findAll({
     // include: ['Songs','Artist']
   });
