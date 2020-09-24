@@ -1,10 +1,12 @@
 const { Router } = require('express');
 const { Song } = require('../models');
-
+const topLimit = 20;
 const router = Router();
 
 router.get('/top/', async (req, res) => {
-  const allSongs = await Song.findAll();
+  const allSongs = await Song.findAll({
+    limit: topLimit
+  });
   console.log(allSongs);
   res.json(allSongs)
 })

@@ -72,11 +72,13 @@
 // module.exports = router;
 const { Router } = require('express');
 const { Artist } = require('../models');
-
+const topLimit = 20;
 const router = Router();
 
 router.get('/top/', async (req, res) => {
-  const allArtists = await Artist.findAll();
+  const allArtists = await Artist.findAll({
+    limit: topLimit
+  });
   res.json(allArtists)
 })
 
