@@ -32,15 +32,16 @@ useEffect(() => {
   (async () => {
     try {
       const { data } = await axios.get(`/api/song/${id}`);
+      console.log(data);
       if(location.search!==""){
          const  type = location.search.split('?')[1].split('=');
            const  moreSongs  =  await axios.get(`/api/${type[0]}/${type[1]}/list-of-songs`);
             console.log(moreSongs.data);
             setRelatedSongs(moreSongs.data[0])
       }
-      const fullDate = new Date(data[0].upload_at).getFullYear() +
-      "-" +  new Date(data[0].upload_at).getMonth() + "-" +
-      new Date(data[0].upload_at).getDay();
+      const fullDate = new Date(data[0].createdAt).getFullYear() +
+      "-" +  new Date(data[0].createdAt).getMonth() + "-" +
+      new Date(data[0].createdAt).getDay();
       setUploadedDate(fullDate)
       console.log(data);
       setSong(data[0]);
@@ -58,7 +59,7 @@ const refresh = () => {
     return (
       <div className="songPage">
         <div className="songPage__song">
-        <Youtube videoId={song.youtube_link} opts={opts} onReady={onReady} />
+        <Youtube videoId={song.youtubeLink} opts={opts} onReady={onReady} />
         <div className="songPage__Info">
         <div className="songPage__label">
          <span>Song Name:</span>
@@ -66,7 +67,7 @@ const refresh = () => {
          </div>
             <div className="songPage__label">
          <span>Artist Name:</span>
-        <span>{song.artist_name}</span>
+        <span>{song.Artist.name}</span>
          </div>
          <div className="songPage__label">
          <span>Likes:</span>
@@ -87,7 +88,7 @@ const refresh = () => {
           <h2 className="relatedSongHeader">Related Songs</h2>
         { relatedSongs[0]===undefined ? <h1 className="relatedSongHeader">No songs related to this song</h1> :
             relatedSongs.map((song) =>
-            <SongRow key={song.name} name={song.name} length={song.length} artist={song.artist_name}
+            <SongRow key={song.name} name={song.name} length={song.length} artist={song.Artist.artist_name}
              songID={song.song_id} type={location.search.split('?')[1].split('=')[0]}
               typeID={location.search.split('?')[1].split('=')[1]} refresh={refresh} />)  }
         </div>
