@@ -3,7 +3,7 @@ const {
   Model
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
-  class song extends Model {
+  class Song extends Model {
     /**
      * Helper method for defining associations.
      * This method is not a part of Sequelize lifecycle.
@@ -11,9 +11,15 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      this.belongsTo(models.Artist, {
+        foreignKey: 'artistId'
+      });
+      this.belongsTo(models.Album,{
+        foreignKey: 'albumId'
+      });
     }
   };
-  song.init({
+  Song.init({
     song_name: DataTypes.STRING,
     albumId: DataTypes.INTEGER,
     artistId: DataTypes.INTEGER,
@@ -24,7 +30,7 @@ module.exports = (sequelize, DataTypes) => {
     cover_img: DataTypes.TEXT
   }, {
     sequelize,
-    modelName: 'song',
+    modelName: 'Song',
   });
-  return song;
+  return Song;
 };

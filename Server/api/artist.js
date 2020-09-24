@@ -71,33 +71,33 @@
 
 // module.exports = router;
 const { Router } = require('express');
-const { artist } = require('../models');
+const { Artist } = require('../models');
 
 const router = Router();
 
 router.get('/top/', async (req, res) => {
-  const allArtists = await artist.findAll();
+  const allArtists = await Artist.findAll();
   res.json(allArtists)
 })
 
 router.post('/', async (req, res) => {
-  const newArtist = await artist.create(req.body);
+  const newArtist = await Artist.create(req.body);
   res.json(newArtist)
 })
 
 router.get('/:artistId', async (req, res) => {
-  const artistById = await artist.findByPk(req.params.artistId);
+  const artistById = await Artist.findByPk(req.params.artistId);
   res.json(artistById)
 })
 
 router.patch('/:artistId', async (req, res) => {
-  const artistById = await artist.findByPk(req.params.artistId);
+  const artistById = await Artist.findByPk(req.params.artistId);
   await artistById.update(req.body);
   res.json(artistById)
 })
 
 router.delete('/:artistId', async (req, res) => {
-  const artistById = await artist.findByPk(req.params.artistId);
+  const artistById = await Artist.findByPk(req.params.artistId);
   await artistById.destroy();
   res.json({ deleted: true })
 })
