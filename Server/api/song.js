@@ -1,4 +1,5 @@
 const { Router } = require('express');
+const { Op } = require("sequelize");
 const { Song } = require('../models');
 const topLimit = 20;
 const router = Router();
@@ -10,8 +11,21 @@ router.get('/top/', async (req, res) => {
     limit: topLimit
   });
   console.log(allSongs);
-  res.json(allSongs)
+  res.json(allSongs);
 })
+
+router.get('/search/:searchInput', async (req, res) => {
+  const searchResults = await Song.findAll({
+    attributes:['id', ['song_name', 'name'], 'cover_img'],
+    where: {
+     'song_name':{[Op.like]: `%${req.params.searchInput}%`}},
+      order: ['likes'],
+    limit: topLimit
+  });
+  console.log(searchResults);
+  res.json(searchResults);
+})
+
 router.post('/', async (req, res) => {
   const newSong = await Song.create(req.body);
   res.json(newSong)

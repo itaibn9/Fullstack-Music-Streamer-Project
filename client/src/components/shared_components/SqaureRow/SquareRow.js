@@ -27,7 +27,7 @@ function SquareRow({table, page, searchBy}) {
               setDetails(data[0])
             } else if(searchQuery!==undefined&&searchBy!==""){
               console.log(`------------------------------${table}---------------------------${searchQuery}-----`)
-              const { data } = await axios.get(`/api/search/${table}/${searchQuery}`);
+              const { data } = await axios.get(`/api/${table}/search/${searchQuery}`);
               console.log(data);
               setDetails(data);
               setLetterCounter(1)

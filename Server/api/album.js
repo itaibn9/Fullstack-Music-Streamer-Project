@@ -1,5 +1,6 @@
 const { Router } = require('express');
 const { Album } = require('../models');
+const { Op } = require("sequelize");
 const topLimit = 20;
 const router = Router();
 
@@ -8,10 +9,21 @@ router.get('/top/', async (req, res) => {
     attributes: ['id', ['album_name', 'name'], 'cover_img'],
     order: ['likes'],
     limit: topLimit
-    // include: ['Songs','Artist']
   });
   res.json(allAlbums)
 });
+
+router.get('/search/:searchInput', async (req, res) => {
+  const searchResults = await Album.findAll({
+    attributes:['id', ['album_name', 'name'], 'cover_img'],
+    where: {
+     'album_name':{[Op.like]: `%${req.params.searchInput}%`}},
+      order: ['likes'],
+    limit: topLimit
+  });
+  console.log(searchResults);
+  res.json(searchResults);
+})
 
 router.post('/', async (req, res) => {
   const newAlbum = await Album.create(req.body);

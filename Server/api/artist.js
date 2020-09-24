@@ -1,78 +1,7 @@
-// const express = require('express');
-// const router = express.Router();
-// const connection = require('../connection')
-// const newQuery = require('./querySelector');
-
-// router.get('/:id', async (req, res) => {
-//     const query = `CALL GetArtistDetails(${req.params.id});`
-//     connection.query(query, (error, results, fields) => {
-//         if (error) {
-//             res.send(error.message);
-//             throw error;
-//         };
-//         res.send(results);
-//     });
-// });
-
-// router.get('/:id/list-of-songs', async (req, res) => {
-//     const query = `CALL getArtistSongList(${req.params.id});`
-//     connection.query(query, (error, results, fields) => {
-//         if (error) {
-//             res.send(error.message);
-//             throw error;
-//         };
-//         res.send(results);
-//     });
-// });
-
-// router.get('/:id/list-of-albums', async (req, res) => {
-//     const query = `CALL GetRelatedAlbumsFromArtist(${req.params.id});`
-//     connection.query(query, (error, results, fields) => {
-//         if (error) {
-//             res.send(error.message);
-//             throw error;
-//         };
-//         res.send(results);
-//     });
-// });
-
-// router.put('/:id', async (req, res) => {
-//     const query = newQuery('putById', 'artist', req.body, req.params.id)
-//     connection.query(query, (error, results, fields) => {
-//         if (error) {
-//             res.send(error.message);
-//             throw error;
-//         };
-//         res.status(200).json({message:"successfully updated"});
-//       });
-// });
-
-// router.post('/', async (req, res) =>{
-//     const query = newQuery("post", "artist", req.body)
-//     connection.query(query, (error, results, fields) => {
-//         if (error) {
-//             res.send(error.message);
-//             throw error;
-//         };
-//         res.status(200).json({message:"successfully added"});
-//       });
-// });
-
-// router.delete('/:id', async (req, res) => {
-//     const query = newQuery('deleteById', 'artist','', req.params.id)
-//     connection.query(query, (error, results, fields) => {
-//         if (error) {
-//             res.send(error.message);
-//             throw error;
-//         };
-//         res.status(200).json({message:"successfully deleted"});
-//       });
-// });
-
-// module.exports = router;
 const { Router } = require('express');
 const { Artist } = require('../models');
 const topLimit = 20;
+const { Op } = require("sequelize");
 const router = Router();
 
 router.get('/top/', async (req, res) => {
@@ -82,6 +11,18 @@ router.get('/top/', async (req, res) => {
     limit: topLimit
   });
   res.json(allArtists)
+})
+
+router.get('/search/:searchInput', async (req, res) => {
+  const searchResults = await Artist.findAll({
+    attributes:['id', ['artist_name', 'name'], 'cover_img'],
+    where: {
+     'artist_name':{[Op.like]: `%${req.params.searchInput}%`}},
+      order: ['likes'],
+    limit: topLimit
+  });
+  console.log(searchResults);
+  res.json(searchResults);
 })
 
 router.post('/', async (req, res) => {
