@@ -77,6 +77,8 @@ const router = Router();
 
 router.get('/top/', async (req, res) => {
   const allArtists = await Artist.findAll({
+    attributes: ['id', ['artist_name', 'name'], 'cover_img'],
+    order: ['likes'],
     limit: topLimit
   });
   res.json(allArtists)

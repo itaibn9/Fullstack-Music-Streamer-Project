@@ -5,6 +5,8 @@ const router = Router();
 
 router.get('/top/', async (req, res) => {
   const allPlaylists = await Playlist.findAll({
+    attributes: ['id', ['playlist_name', 'name'], 'cover_img'],
+    order: ['likes'],
     limit: topLimit
   });
   res.json(allPlaylists)

@@ -5,6 +5,8 @@ const router = Router();
 
 router.get('/top/', async (req, res) => {
   const allSongs = await Song.findAll({
+    attributes: ['id', ['song_name', 'name'], 'cover_img'],
+    order: ['likes'],
     limit: topLimit
   });
   console.log(allSongs);
