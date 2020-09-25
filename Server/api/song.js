@@ -17,7 +17,7 @@ router.get('/top/', async (req, res) => {
 
 router.get('/:songId', async (req, res) => {
   const song = await Song.findAll({
-    attributes:['song_name', 'lyric','youtubeLink', 'createdAt', 'length','likes'],
+    attributes:['song_name', 'lyric','youtubeLink', 'createdAt', 'length','likes','id'],
     include: [{model:Artist, attributes: [['artist_name', 'name']]}],
     where: {
       id: [req.params.songId]

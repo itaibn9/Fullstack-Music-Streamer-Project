@@ -5,7 +5,9 @@ import like_logo from './like_logo.png';
 import './SongRow.css';
 
 function SongRow({name, length, artist, songID, type, typeID, refresh}) {
-
+console.log(songID);
+console.log(typeID);
+console.log(type);
     return (
         <div className="songRow">
             <Link className="play_logo" to={`/api/song/${songID}?${type}=${typeID}`}>

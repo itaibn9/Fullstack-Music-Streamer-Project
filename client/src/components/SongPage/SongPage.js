@@ -38,6 +38,7 @@ useEffect(() => {
       console.log(location.search);
       if(location.search!==""){
          const  type = location.search.split('?')[1].split('=');
+         console.log(location.search.split('?')[1].split('=')[0]);
            const  moreSongs  =  await axios.get(`/api/${type[0]}/${type[1]}/list-of-songs`);
             console.log(moreSongs.data);
             setRelatedSongs(moreSongs.data)
@@ -91,7 +92,7 @@ const refresh = () => {
         { relatedSongs[0]===undefined ? <h1 className="relatedSongHeader">No songs related to this song</h1> :
             relatedSongs.map((song) =>
             <SongRow key={song.name} name={song.name} length={song.length} artist={song.Artist.artist_name}
-             songID={song.song_id} type={location.search.split('?')[1].split('=')[0]}
+             songID={song.id} type={location.search.split('?')[1].split('=')[0]}
               typeID={location.search.split('?')[1].split('=')[1]} refresh={refresh} />)  }
         </div>
       </div>
