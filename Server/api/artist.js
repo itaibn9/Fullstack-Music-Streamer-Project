@@ -13,6 +13,14 @@ router.get('/top/', async (req, res) => {
   res.json(allArtists)
 })
 
+router.get('/:artistId', async (req, res) => {
+  const artistById = await Artist.findAll({
+    attributes:[['artist_name','name'], 'cover_img'],
+    where:{'id':{[Op.eq]: req.params.artistId}}
+  });
+  res.json(artistById)
+})
+
 router.get('/search/:searchInput', async (req, res) => {
   const searchResults = await Artist.findAll({
     attributes:['id', ['artist_name', 'name'], 'cover_img'],
@@ -30,10 +38,6 @@ router.post('/', async (req, res) => {
   res.json(newArtist)
 })
 
-router.get('/:artistId', async (req, res) => {
-  const artistById = await Artist.findByPk(req.params.artistId);
-  res.json(artistById)
-})
 
 router.patch('/:artistId', async (req, res) => {
   const artistById = await Artist.findByPk(req.params.artistId);
