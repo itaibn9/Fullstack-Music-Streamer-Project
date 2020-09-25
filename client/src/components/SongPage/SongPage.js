@@ -32,18 +32,21 @@ useEffect(() => {
   (async () => {
     try {
       const { data } = await axios.get(`/api/song/${id}`);
-      console.log(data);
+      console.log(id);
+      console.log(data[0]);
+      console.log(location.search);
       if(location.search!==""){
          const  type = location.search.split('?')[1].split('=');
+         console.log(type)
            const  moreSongs  =  await axios.get(`/api/${type[0]}/${type[1]}/list-of-songs`);
             console.log(moreSongs.data);
-            setRelatedSongs(moreSongs.data[0])
+            setRelatedSongs(moreSongs.data)
       }
       const fullDate = new Date(data[0].createdAt).getFullYear() +
       "-" +  new Date(data[0].createdAt).getMonth() + "-" +
       new Date(data[0].createdAt).getDay();
       setUploadedDate(fullDate)
-      console.log(data);
+      console.log(data[0]);
       setSong(data[0]);
     } catch (error) {
       console.log(error);
@@ -67,7 +70,7 @@ const refresh = () => {
          </div>
             <div className="songPage__label">
          <span>Artist Name:</span>
-        <span>{song.Artist.name}</span>
+        <span>{song.song_name}</span>
          </div>
          <div className="songPage__label">
          <span>Likes:</span>
