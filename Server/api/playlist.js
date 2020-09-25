@@ -31,6 +31,14 @@ router.get('/:playlistId/list-of-songs', async (req, res) => {
   res.json(songsInPlaylist);
 })
 
+router.get('/:playlistId', async (req, res) => {
+  const playlistById = await Playlist.findAll({
+    attributes:[['playlist_name','name'], 'cover_img', ['createdAt', 'created_at']],
+    where:{'id':{[Op.eq]: req.params.playlistId}}
+  });
+  res.json(playlistById)
+})
+
 router.get('/search/:searchInput', async (req, res) => {
   const searchResults = await Playlist.findAll({
     attributes:['id', ['playlist_name', 'name'], 'cover_img'],
