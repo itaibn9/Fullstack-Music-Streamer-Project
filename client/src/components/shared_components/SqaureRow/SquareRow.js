@@ -23,7 +23,7 @@ function SquareRow({table, page, searchBy}) {
             console.log(location[3]);
             if(location[2]==='artist'){
               const {data} = await axios.get(`/api/${table}/${location[3]}/list-of-albums`);
-              console.log(data +"----"+table+"----");
+              console.log(data[0]);
               setDetails(data)
             } else if(searchQuery!==undefined&&searchBy!==""){
               console.log(`------------------------------${table}---------------------------${searchQuery}-----`)

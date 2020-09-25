@@ -30,7 +30,7 @@ function ArtistPage() {
             <SquareRow table={'artist'} page={'album'} />}
             <div className="list_of_songs">
             { listOfSongs[0]===undefined ?   <h1>No songs To this Artist</h1> :
-            listOfSongs.map((song) => <SongRow name={song.name} length={song.length} artist={song.Artist.name}
+            listOfSongs.map((song) => <SongRow key={`${song.name}+${song.id}`} name={song.name} length={song.length} artist={song.Artist.name}
              songID={song.id} type={location[2]} typeID={location[3]} />)  }
         </div>
             

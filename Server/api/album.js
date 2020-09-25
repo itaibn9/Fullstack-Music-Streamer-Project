@@ -1,5 +1,5 @@
 const { Router } = require('express');
-const { Album } = require('../models');
+const { Album, Song, Artist } = require('../models');
 const { Op } = require("sequelize");
 const topLimit = 20;
 const router = Router();
@@ -13,6 +13,18 @@ router.get('/top/', async (req, res) => {
   res.json(allAlbums)
 });
 
+router.get('/:albumId/list-of-songs', async (req, res) => {
+  const songsInAlbum = await Song.findAll({
+    attributes:[['song_name', 'name'], 'id', 'length'],
+    include: [{model:Artist, attributes: [['artist_name', 'name']]}],
+    where: {
+      albumId: [req.params.albumId]
+    }
+  });
+  console.log(songsInAlbum);
+  res.json(songsInAlbum);
+})
+
 router.get('/search/:searchInput', async (req, res) => {
   const searchResults = await Album.findAll({
     attributes:['id', ['album_name', 'name'], 'cover_img'],
@@ -25,15 +37,20 @@ router.get('/search/:searchInput', async (req, res) => {
   res.json(searchResults);
 })
 
+router.get('/:albumId', async (req, res) => {
+  const albumById = await Album.findAll({
+    attributes:[['album_name','name'], 'cover_img', ['createdAt', 'created_at']],
+    include: [{model:Artist, attributes: [['artist_name', 'name']]}],
+    where:{'id':{[Op.eq]: req.params.albumId}}
+  });
+  res.json(albumById)
+})
+
 router.post('/', async (req, res) => {
   const newAlbum = await Album.create(req.body);
   res.json(newAlbum)
 })
 
-router.get('/:albumId', async (req, res) => {
-  const album = await Album.findByPk(req.params.albumId);
-  res.json(album)
-})
 
 router.patch('/:albumId', async (req, res) => {
   const album = await Album.findByPk(req.params.albumId);
