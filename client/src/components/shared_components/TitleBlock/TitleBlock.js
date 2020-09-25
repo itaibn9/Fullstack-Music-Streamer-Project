@@ -31,7 +31,7 @@ function TitleBlock() {
             <img className="cover_img" src={titleData.cover_img} alt="wallpaper" />
             <div className="title_info">
                 <div> {location[2]} Name: {titleData.name}</div>
-                <div>{titleData.created_at ? "Created At: " + createdYear :  location[2]==='album' ? artistName  : null}</div>
+                <div>{location[2]==="album" ? "Artist Name: " + artistName : titleData.created_at ? "Created At: " + createdYear : null}</div>
             </div>
             {/* <div className="control_links">
             <Link to={`/song/${location[2]}`}>

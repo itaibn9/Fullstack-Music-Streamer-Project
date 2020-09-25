@@ -22,6 +22,7 @@ function SongPage() {
   const [uploadedDate, setUploadedDate] = useState();
   const [relatedSongs, setRelatedSongs] = useState([]);
   const [refreshPage, setRefreshPage] = useState(false);
+  const [artistName, setArtistName] = useState()
   const onReady = (event) => {
     event.target.pauseVideo();
   }
@@ -37,7 +38,6 @@ useEffect(() => {
       console.log(location.search);
       if(location.search!==""){
          const  type = location.search.split('?')[1].split('=');
-         console.log(type)
            const  moreSongs  =  await axios.get(`/api/${type[0]}/${type[1]}/list-of-songs`);
             console.log(moreSongs.data);
             setRelatedSongs(moreSongs.data)
@@ -46,7 +46,7 @@ useEffect(() => {
       "-" +  new Date(data[0].createdAt).getMonth() + "-" +
       new Date(data[0].createdAt).getDay();
       setUploadedDate(fullDate)
-      console.log(data[0]);
+      setArtistName(data[0].Artist.name);
       setSong(data[0]);
     } catch (error) {
       console.log(error);
@@ -57,7 +57,6 @@ useEffect(() => {
 const refresh = () => {
   refreshPage ? setRefreshPage(false) : setRefreshPage(true);
 };
-
 
     return (
       <div className="songPage">
@@ -70,7 +69,7 @@ const refresh = () => {
          </div>
             <div className="songPage__label">
          <span>Artist Name:</span>
-        <span>{song.song_name}</span>
+        <span>{artistName}</span>
          </div>
          <div className="songPage__label">
          <span>Likes:</span>
