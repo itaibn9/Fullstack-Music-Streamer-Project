@@ -20,11 +20,11 @@ function SquareRow({table, page, searchBy}) {
     useEffect(() => {
         (async () => {
           try {
-            console.log(location[1]);
-            if(location[1]==='artist'){
-              const { data } = await axios.get(`/api/${location[2]}/${location[3]}/list-of-albums`);
-              console.log(data);
-              setDetails(data[0])
+            console.log(location[3]);
+            if(location[2]==='artist'){
+              const {data} = await axios.get(`/api/${table}/${location[3]}/list-of-albums`);
+              console.log(data +"----"+table+"----");
+              setDetails(data)
             } else if(searchQuery!==undefined&&searchBy!==""){
               console.log(`------------------------------${table}---------------------------${searchQuery}-----`)
               const { data } = await axios.get(`/api/${table}/search/${searchQuery}`);
@@ -47,7 +47,7 @@ function SquareRow({table, page, searchBy}) {
         <Carousel  itemsToScroll={4} itemsToShow={4}>
             {details.map((item) => <Link key={item.name+"-"+item.id} className="topLink" to={`/api/${page}/${item.id}`}>
               <img className="square_img" src={item.cover_img} alt={`${table}`} />
-              <p>{item.name}</p></Link>)}
+    {location[2]==='artist'? <p>{item.Artist.name}</p> : <p>{item.name}</p>}</Link>)}
             </Carousel>
             </div>
     )

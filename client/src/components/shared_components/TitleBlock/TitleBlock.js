@@ -14,10 +14,11 @@ function TitleBlock() {
     useEffect(() => {
         (async () => {
           try {
+            console.log(location)
             const { data } = await axios.get(`/api/${location[2]}/${location[3]}`);
             console.log(data);
-            setCreatedYear(new Date(data[0][0].created_at).getFullYear())
-            setTitleData(data[0][0]);
+            setCreatedYear(new Date(data[0].created_at).getFullYear())
+            setTitleData(data[0]);
           } catch (error) {
             console.log(error);
           }

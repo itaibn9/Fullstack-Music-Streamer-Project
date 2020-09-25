@@ -13,9 +13,10 @@ function ArtistPage() {
     useEffect(() => {
         (async () => {
           try {
+            console.log(location)
             const { data } = await axios.get(`/api/artist/${location[3]}/list-of-songs`);
-            console.log(data);
-            setListOfSongs(data[0]);
+            console.log();
+            setListOfSongs(data );
           } catch (error) {
             console.log(error);
           }
@@ -29,8 +30,8 @@ function ArtistPage() {
             <SquareRow table={'artist'} page={'album'} />}
             <div className="list_of_songs">
             { listOfSongs[0]===undefined ?   <h1>No songs To this Artist</h1> :
-            listOfSongs.map((song) => <SongRow name={song.name} length={song.length} artist={song.artist_name}
-             songID={song.song_id} type={location[2]} typeID={location[3]} />)  }
+            listOfSongs.map((song) => <SongRow name={song.name} length={song.length} artist={song.Artist.name}
+             songID={song.id} type={location[2]} typeID={location[3]} />)  }
         </div>
             
         </div>
