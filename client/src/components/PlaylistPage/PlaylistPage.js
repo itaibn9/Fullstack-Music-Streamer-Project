@@ -14,7 +14,7 @@ function PlaylistPage() {
           try {
             const { data } = await axios.get(`/api/playlist/${location[3]}/list-of-songs`);
             console.log(data);
-            setListOfSongs(data[0]);
+            setListOfSongs(data);
           } catch (error) {
             console.log(error);
           }
@@ -25,7 +25,7 @@ function PlaylistPage() {
         <TitleBlock />
         <div className="list_of_songs">
             { listOfSongs[0]===undefined ?   <h1>No songs in the playlist</h1> :
-            listOfSongs.map((song) => <SongRow name={song.name} length={song.length} artist={song.artist_name}
+            listOfSongs.map((song) => <SongRow key={`${song.length}+${song.id}`} name={song.name} length={song.length} artist={song.artist_name}
              songID={song.song_id} type={location[2]} typeID={location[3]} />)  }
         </div>
     </div>

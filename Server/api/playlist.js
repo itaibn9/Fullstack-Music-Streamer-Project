@@ -1,6 +1,6 @@
 const { Router } = require('express');
 const { Op } = require("sequelize");
-const { Playlist } = require('../models');
+const { Playlist, Song_Playlist_interaction, Song, Artist } = require('../models');
 const topLimit = 20;
 const router = Router();
 
@@ -11,6 +11,24 @@ router.get('/top/', async (req, res) => {
     limit: topLimit
   });
   res.json(allPlaylists)
+})
+
+router.get('/:playlistId/list-of-songs', async (req, res) => {
+  let songsInPlaylist = await Song_Playlist_interaction.findAll({
+    attributes:['song_id'],
+    include: [
+      {model:Song,
+       attributes: [['song_name', 'name'], 'length', 'id'],
+       include: [
+         {model:Artist,
+          attributes:['artist_name']}
+       ]},
+    ],
+    where:{'playlist_id':{[Op.eq]: req.params.playlistId}}
+  });
+  songsInPlaylist = songsInPlaylist.map((song) => song.Song)
+  console.log(songsInPlaylist);
+  res.json(songsInPlaylist);
 })
 
 router.get('/search/:searchInput', async (req, res) => {
