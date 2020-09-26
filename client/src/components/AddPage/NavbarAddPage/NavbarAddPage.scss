@@ -1,0 +1,27 @@
+@import '../../../variables';
+@import '../../../mixin';
+
+.navbarAddPage{
+        background-color: $block-color-secondary;
+        max-height: 25vh;
+        min-width:165px;
+        width: 100%;
+        position: absolute;
+        @include flex(row, space-between,center);
+        &__container{
+            @include flex(row, center, center);
+        }
+        &__links{
+            @include flex(row, center,center);
+            justify-self: flex-start;
+            margin: 0.5rem 4rem;
+            text-decoration: none;
+            @include details-text;
+        }}
+        h1{  
+            @include details-text;
+            width: min-content;
+            margin-left: 3rem;
+            font-size: 1.5rem;
+        }
+    

@@ -2,12 +2,13 @@
 @import '../../mixin';
 
 .homePage{
-    display: grid;
+
     background-color: $background-color;
     &__Welcome{
         width: 100%;
         @include details-text;
         text-align: center;
+        padding-left: 500px;
         padding-top: 150px;
     }
     &__topTen{

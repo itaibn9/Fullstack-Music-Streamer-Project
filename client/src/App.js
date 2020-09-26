@@ -9,6 +9,7 @@ import HomePage from './components/HomePage/HomePage';
 import AlbumPage from './components/AlbumPage/AlbumPage';
 import ArtistPage from './components/ArtistPage/ArtistPage';
 import PlaylistPage from './components/PlaylistPage/PlaylistPage';
+import AddPage from './components/AddPage/AddPage';
 function App() {
   return (
     <Router >
@@ -20,6 +21,7 @@ function App() {
         <Route path="/api/artist/:id"><ArtistPage /></Route>
         <Route path="/api/playlist/:id"><PlaylistPage /></Route> 
         <Route path="/api/search"><SearchPage /></Route>
+        <Route path="/api/add"><AddPage /></Route>
         <Route path='/404' component={NotFoundPage} />
         <Redirect from='*' to='/404' /> 
       </Switch>
