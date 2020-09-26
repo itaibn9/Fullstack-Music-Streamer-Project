@@ -6,6 +6,7 @@ router.use('/song', require('./song'));
 router.use('/album', require('./album'));
 router.use('/artist', require('./artist'));
 router.use('/playlist', require('./playlist'));
+router.use('/playlistSongInteraction', require('./song_playlist_interaction'));
 
 module.exports = router;
 
