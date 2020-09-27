@@ -23,6 +23,7 @@ function SongPage() {
   const [relatedSongs, setRelatedSongs] = useState([]);
   const [refreshPage, setRefreshPage] = useState(false);
   const [artistName, setArtistName] = useState()
+  const [sumlikes, setSumLikes] = useState();
   const [likeButton, setLikeButton] = useState(like_logo);
   const onReady = (event) => {
     event.target.pauseVideo();
@@ -43,6 +44,8 @@ useEffect(() => {
            const  moreSongs  =  await axios.get(`/api/${type[0]}/${type[1]}/list-of-songs`);
             setRelatedSongs(moreSongs.data)
       }
+      const countlikes = await axios.get(`/api/song/${id}/count-likes`);
+      setSumLikes(countlikes.data[0].countLikes);
       const fullDate = new Date(data[0].createdAt).getFullYear() +
       "-" +  new Date(data[0].createdAt).getMonth() + "-" +
       new Date(data[0].createdAt).getDay();
@@ -96,7 +99,7 @@ const refresh = () => {
          </div>
          <div className="songPage__label">
          <span>Likes:</span>
-        <span>{song.likes}</span>
+        <span>{sumlikes}</span>
          </div>
          <div className="songPage__label">
          <span>uploaded At:</span>
