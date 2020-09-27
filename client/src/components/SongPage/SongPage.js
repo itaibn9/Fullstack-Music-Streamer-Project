@@ -4,7 +4,7 @@ import { useParams, useLocation } from "react-router-dom";
 import './SongPage.css';
 import SongRow from '../shared_components/songRow/SongRow';
 import axios from 'axios';
-
+import like_logo from '../shared_components/songRow/like_logo.png';
 
 
 const opts = {
@@ -28,19 +28,13 @@ function SongPage() {
   }
   const { id } = useParams();
 
-
 useEffect(() => {
   (async () => {
     try {
       const { data } = await axios.get(`/api/song/${id}`);
-      console.log(id);
-      console.log(data[0]);
-      console.log(location.search);
       if(location.search!==""){
          const  type = location.search.split('?')[1].split('=');
-         console.log(location.search.split('?')[1].split('=')[0]);
            const  moreSongs  =  await axios.get(`/api/${type[0]}/${type[1]}/list-of-songs`);
-            console.log(moreSongs.data);
             setRelatedSongs(moreSongs.data)
       }
       const fullDate = new Date(data[0].createdAt).getFullYear() +
@@ -54,6 +48,17 @@ useEffect(() => {
     }
   })();
 }, [refreshPage]);
+
+const onLike = async() => {
+try {
+  await axios.post(`/api/song_likes`, {
+    "user_id": 1,
+    "song_id": parseInt(location.pathname.split("/")[3])
+  })
+} catch (error) {
+  console.log(error)
+}
+}
 
 const refresh = () => {
   refreshPage ? setRefreshPage(false) : setRefreshPage(true);
@@ -85,6 +90,9 @@ const refresh = () => {
            <span>Lyrics</span>
            </button>
          </div>
+         <div className="songPage__label">
+            <button onClick={onLike}><img className="control__logo" src={like_logo} alt="like" /></button>
+            </div>
           </div>
         </div>
         <div className="songPage__rightBlock">

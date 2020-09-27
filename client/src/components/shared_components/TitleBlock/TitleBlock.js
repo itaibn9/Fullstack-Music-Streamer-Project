@@ -44,20 +44,6 @@ function TitleBlock() {
       } catch (error) {
         console.log(error);
       }
-      
-      // const typeOfIdable = `${location[2]}_id`;
-      // const body = {
-      //   "user_id": 1,
-      //   typeOfIdable: parseInt(location[3])
-      // };
-      // const tableLike = JSON.stringify(typeOfIdable);
-      // const LikeTo_id =  parseInt(location[3]);
-      // console.log(tableLike);
-      // console.log(LikeTo_id );
-      // await axios.post(`/api/${location[2]}_likes`, {
-      //   "user_id": 1,
-      //   tableLike: LikeTo_id
-      // })
     }
 
     useEffect(() => {
