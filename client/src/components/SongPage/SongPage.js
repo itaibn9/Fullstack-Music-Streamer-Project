@@ -5,7 +5,7 @@ import './SongPage.css';
 import SongRow from '../shared_components/songRow/SongRow';
 import axios from 'axios';
 import like_logo from '../shared_components/songRow/like_logo.png';
-
+import disLike_logo from '../shared_components/TitleBlock/dislike.png';
 
 const opts = {
     height: '390',
@@ -23,6 +23,7 @@ function SongPage() {
   const [relatedSongs, setRelatedSongs] = useState([]);
   const [refreshPage, setRefreshPage] = useState(false);
   const [artistName, setArtistName] = useState()
+  const [likeButton, setLikeButton] = useState(like_logo);
   const onReady = (event) => {
     event.target.pauseVideo();
   }
@@ -31,7 +32,12 @@ function SongPage() {
 useEffect(() => {
   (async () => {
     try {
+      console.log(location.pathname.split("/"));
       const { data } = await axios.get(`/api/song/${id}`);
+      const  didlike = await axios.get(`/api/${location.pathname.split("/")[2]}_likes/1/${location.pathname.split("/")[3]}`);
+            if(didlike.data.length > 0 && likeButton === like_logo){
+              setLikeButton(disLike_logo);
+            }; 
       if(location.search!==""){
          const  type = location.search.split('?')[1].split('=');
            const  moreSongs  =  await axios.get(`/api/${type[0]}/${type[1]}/list-of-songs`);
@@ -50,14 +56,25 @@ useEffect(() => {
 }, [refreshPage]);
 
 const onLike = async() => {
-try {
-  await axios.post(`/api/song_likes`, {
-    "user_id": 1,
-    "song_id": parseInt(location.pathname.split("/")[3])
-  })
-} catch (error) {
-  console.log(error)
-}
+  if(likeButton === like_logo){
+    try {
+      await axios.post(`/api/song_likes`, {
+        "user_id": 1,
+        "song_id": parseInt(location.pathname.split("/")[3])
+      })
+      setLikeButton(disLike_logo);
+    } catch (error) {
+      console.log(error)
+    }
+  } else {
+    try {
+      await axios.delete(`/api/song_likes/1/${location.pathname.split("/")[3]}`)
+      setLikeButton(like_logo);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
 }
 
 const refresh = () => {
@@ -91,7 +108,7 @@ const refresh = () => {
            </button>
          </div>
          <div className="songPage__label">
-            <button onClick={onLike}><img className="control__logo" src={like_logo} alt="like" /></button>
+            <button onClick={onLike}><img className="control__logo" src={likeButton} alt="like" /></button>
             </div>
           </div>
         </div>
