@@ -1,11 +1,12 @@
 import React from 'react';
 import './AddArtistPage.css';
 function AddArtistPage() {
-    const postArtist = ()=>{
-        return true
+    const postArtist = (event)=>{
+        // const formData = new FormData(event.target)
+        console.log( new FormData(event.target))
     }
     return (
-        <form className="artistAddPage">
+        <form className="artistAddPage" onSubmit={postArtist}>
             <div className="form__group field">
             <input className="form__field" placeholder="Artist name" required/>
             <label className="form__label">Artist name</label>
@@ -18,7 +19,7 @@ function AddArtistPage() {
             <input className="form__field" placeholder="Description" required/>
             <label className="form__label">Description</label>
             </div>
-            <button type="submit" onSubmit={postArtist}>Add Artist</button>
+            <button type="submit">Add Artist</button>
             </form>
        
     )
