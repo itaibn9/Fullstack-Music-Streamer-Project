@@ -8,6 +8,7 @@ import axios from 'axios';
 function PlaylistPage() {
     const [location, setLocation] = useState(useLocation().pathname.split('/'));
     const [listOfSongs, setListOfSongs] = useState([]);
+
     useEffect(() => {
         (async () => {
           try {
