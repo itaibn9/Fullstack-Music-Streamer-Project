@@ -67,6 +67,8 @@ function TitleBlock() {
         (async () => {
           try {
             const { data } = await axios.get(`/api/${location[2]}/${location[3]}`);
+            setTitleData(data[0]);
+            setCreatedYear(new Date(data[0].created_at).getFullYear())
             const  didlike = await axios.get(`/api/${location[2]}_likes/1/${location[3]}`);
             if(didlike.data.length > 0 && likeButton === like_logo){
               setLikeButton(disLike_logo);
@@ -74,9 +76,6 @@ function TitleBlock() {
             if(location[2]==='album'){
               setArtistName(data[0].Artist.name)
             };
-            console.log(data)
-            setTitleData(data[0]);
-            setCreatedYear(new Date(data[0].created_at).getFullYear())
           } catch (error) {
             console.log(error);
           }
