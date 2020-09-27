@@ -2,6 +2,12 @@ const { Router } = require('express');
 const { song_likes } = require('../models');
 const router = Router();
 
+router.get('/', async (req, res) => {
+  const likes = await song_likes.findAll();
+  console.log(likes);
+  res.json(likes);
+})
+
 router.get('/:userId/:songId', async (req, res) => {
   const didLike = await song_likes.findAll({
     where: {

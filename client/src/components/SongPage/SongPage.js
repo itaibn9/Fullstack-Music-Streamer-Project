@@ -45,6 +45,7 @@ useEffect(() => {
             setRelatedSongs(moreSongs.data)
       }
       const countlikes = await axios.get(`/api/song/${id}/count-likes`);
+      console.log(countlikes);
       setSumLikes(countlikes.data[0].countLikes);
       const fullDate = new Date(data[0].createdAt).getFullYear() +
       "-" +  new Date(data[0].createdAt).getMonth() + "-" +
