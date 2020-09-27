@@ -11,6 +11,7 @@ function TitleBlock() {
     const [titleData, setTitleData] = useState([]);
     const [artistName, setArtistName] = useState();
     const [createdYear, setCreatedYear] = useState();
+    const [sumLike, setSumLikes] = useState();
     const [likeButton, setLikeButton] = useState(like_logo);
     const onLike = async () => {
       if(likeButton === like_logo){
@@ -69,6 +70,8 @@ function TitleBlock() {
             const { data } = await axios.get(`/api/${location[2]}/${location[3]}`);
             setTitleData(data[0]);
             setCreatedYear(new Date(data[0].created_at).getFullYear())
+            const countLikes = await axios.get(`/api/${location[2]}/${location[3]}/count-likes`)
+            setSumLikes(countLikes.data[0].countLikes);
             const  didlike = await axios.get(`/api/${location[2]}_likes/1/${location[3]}`);
             if(didlike.data.length > 0 && likeButton === like_logo){
               setLikeButton(disLike_logo);
@@ -87,6 +90,7 @@ function TitleBlock() {
             <div className="title_info">
                 <div> {location[2]} Name: {titleData.name}</div>
                 <div>{location[2]==="album" ? "Artist Name: " + artistName : titleData.created_at ? "Created At: " + createdYear : null}</div>
+                <div> Likes: {sumLike}</div>
             </div>
             <div className="control_links">
             <button onClick={onLike}><img className="control__logo" src={likeButton} alt="like" /></button>

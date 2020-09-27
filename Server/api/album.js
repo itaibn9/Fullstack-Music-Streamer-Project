@@ -1,5 +1,5 @@
 const { Router } = require('express');
-const { Album, Song, Artist } = require('../models');
+const { Album, Song, Artist, Sequelize, album_likes } = require('../models');
 const { Op } = require("sequelize");
 const topLimit = 20;
 const router = Router();
@@ -35,6 +35,17 @@ router.get('/search/:searchInput', async (req, res) => {
   });
   console.log(searchResults);
   res.json(searchResults);
+})
+
+router.get('/:albumId/count-likes', async (req, res) => {
+  const countLikes = await album_likes.findAll({
+    attributes:[[Sequelize.fn("COUNT", Sequelize.col("album_id")), 'countLikes']],
+    where:{
+      album_id: [req.params.albumId]
+    }
+  });
+  console.log(countLikes);
+  res.json(countLikes);
 })
 
 router.get('/:albumId', async (req, res) => {

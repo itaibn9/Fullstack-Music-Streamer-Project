@@ -1,6 +1,6 @@
 const { Router } = require('express');
 const { Op } = require("sequelize");
-const { Playlist, Song_Playlist_interaction, Song, Artist } = require('../models');
+const { Playlist, Song_Playlist_interaction, Song, Artist, playlist_likes, Sequelize } = require('../models');
 const topLimit = 20;
 const router = Router();
 
@@ -11,6 +11,17 @@ router.get('/top/', async (req, res) => {
     limit: topLimit
   });
   res.json(allPlaylists)
+})
+
+router.get('/:playlistId/count-likes', async (req, res) => {
+  const countLikes = await playlist_likes.findAll({
+    attributes:[[Sequelize.fn("COUNT", Sequelize.col("playlist_id")), 'countLikes']],
+    where:{
+      playlist_id: [req.params.playlistId]
+    }
+  });
+  console.log(countLikes);
+  res.json(countLikes);
 })
 
 router.get('/:playlistId/list-of-songs', async (req, res) => {
