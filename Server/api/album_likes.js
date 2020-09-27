@@ -1,10 +1,10 @@
 const { Router } = require('express');
-const { artist_likes } = require('../models');
+const { album_likes } = require('../models');
 const router = Router();
 
 
 router.post('/', async (req, res) => {
-  const newlike = await artist_likes.create(req.body);
+  const newlike = await album_likes.create(req.body);
   res.json(newlike)
 })
 
