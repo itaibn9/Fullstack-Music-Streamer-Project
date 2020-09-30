@@ -62,7 +62,7 @@
   color: white;
 }
 
-.navbar p {
+.navbar pre {
   font-family: "Righteous", cursive;
   font-size: 2rem;
   font-weight: 300;

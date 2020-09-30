@@ -16,15 +16,15 @@ router.post('/', async (req, res) => {
         errorMessage: 'wrong login details'
       })
     }
-    // let token = jwt.sign({username: username},
-    //   process.env.JWT_SECRET,
-    //   {
-    //        expiresIn: '24h' // expires in 24 hours
-    //   }
-    // );
+    let token = jwt.sign({email: email},
+      process.env.JWT_SECRET,
+      {
+           expiresIn: '24h' // expires in 24 hours
+      }
+    );
     return res.json({
       success: true,
-      Message: 'you are logged in'
+      token
     });
   });
 

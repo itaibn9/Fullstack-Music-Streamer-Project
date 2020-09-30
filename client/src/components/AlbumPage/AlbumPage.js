@@ -4,6 +4,7 @@ import TitleBlock from '../shared_components/TitleBlock/TitleBlock';
 import SongRow from '../shared_components/songRow/SongRow';
 import axios from 'axios';
 import { useLocation  } from "react-router-dom";
+import network from '../../services/network';
 
 function AlbumPage() {
     const [location, setLocation] = useState(useLocation().pathname.split('/'));
@@ -13,7 +14,7 @@ function AlbumPage() {
         (async () => {
           try {
             console.log(location);
-            const { data } = await axios.get(`/api/album/${location[3]}/list-of-songs`);
+            const { data } = await network.get(`/api/album/${location[3]}/list-of-songs`);
             console.log(data);
             setListOfSongs(data);
           } catch (error) {

@@ -4,6 +4,7 @@ import like_logo from '../songRow/like_logo.png';
 import disLike_logo from './dislike.png';
 import { useLocation  } from "react-router-dom";
 import axios from 'axios';
+import network from '../../../services/network';
 
 
 function TitleBlock() {
@@ -18,21 +19,21 @@ function TitleBlock() {
         try {
           switch(location[2]) {
             case "artist":
-              await axios.post(`/api/artist_likes`, {
+              await network.post(`/api/artist_likes`, {
                   "user_id": 1,
                   "artist_id": parseInt(location[3])
                 })
                 setLikeButton(disLike_logo);
               break;
             case "playlist":
-              await axios.post(`/api/playlist_likes`, {
+              await network.post(`/api/playlist_likes`, {
                 "user_id": 1,
                 "playlist_id": parseInt(location[3])
               })
               setLikeButton(disLike_logo);
               break;
             case "album":
-              await axios.post(`/api/album_likes`, {
+              await network.post(`/api/album_likes`, {
                 "user_id": 1,
                 "album_id": parseInt(location[3])
               })
@@ -46,15 +47,15 @@ function TitleBlock() {
         try {
           switch(location[2]) {
             case "artist":
-              await axios.delete(`/api/artist_likes/1/${location[3]}`)
+              await network.delete(`/api/artist_likes/1/${location[3]}`)
               setLikeButton(like_logo);
               break;
             case "playlist":
-              await axios.delete(`/api/playlist_likes/1/${location[3]}`)
+              await network.delete(`/api/playlist_likes/1/${location[3]}`)
               setLikeButton(like_logo);
               break;
             case "album":
-              await axios.delete(`/api/album_likes/1/${location[3]}`)
+              await network.delete(`/api/album_likes/1/${location[3]}`)
               setLikeButton(like_logo);
               break;
           }
@@ -67,12 +68,12 @@ function TitleBlock() {
     useEffect(() => {
         (async () => {
           try {
-            const { data } = await axios.get(`/api/${location[2]}/${location[3]}`);
+            const { data } = await network.get(`/api/${location[2]}/${location[3]}`);
             setTitleData(data[0]);
             setCreatedYear(new Date(data[0].created_at).getFullYear())
-            const countLikes = await axios.get(`/api/${location[2]}/${location[3]}/count-likes`)
+            const countLikes = await network.get(`/api/${location[2]}/${location[3]}/count-likes`)
             setSumLikes(countLikes.data[0].countLikes);
-            const  didlike = await axios.get(`/api/${location[2]}_likes/1/${location[3]}`);
+            const  didlike = await network.get(`/api/${location[2]}_likes/1/${location[3]}`);
             if(didlike.data.length > 0 && likeButton === like_logo){
               setLikeButton(disLike_logo);
             }; 

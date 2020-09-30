@@ -6,6 +6,7 @@ import SongRow from '../shared_components/songRow/SongRow';
 import axios from 'axios';
 import like_logo from '../shared_components/songRow/like_logo.png';
 import disLike_logo from '../shared_components/TitleBlock/dislike.png';
+import network from '../../services/network';
 
 const opts = {
     height: '390',
@@ -34,17 +35,17 @@ useEffect(() => {
   (async () => {
     try {
       console.log(location.pathname.split("/"));
-      const { data } = await axios.get(`/api/song/${id}`);
-      const  didlike = await axios.get(`/api/${location.pathname.split("/")[2]}_likes/1/${location.pathname.split("/")[3]}`);
+      const { data } = await network.get(`/api/song/${id}`);
+      const  didlike = await network.get(`/api/${location.pathname.split("/")[2]}_likes/1/${location.pathname.split("/")[3]}`);
             if(didlike.data.length > 0 && likeButton === like_logo){
               setLikeButton(disLike_logo);
             }; 
       if(location.search!==""){
          const  type = location.search.split('?')[1].split('=');
-           const  moreSongs  =  await axios.get(`/api/${type[0]}/${type[1]}/list-of-songs`);
+           const  moreSongs  =  await network.get(`/api/${type[0]}/${type[1]}/list-of-songs`);
             setRelatedSongs(moreSongs.data)
       }
-      const countlikes = await axios.get(`/api/song/${id}/count-likes`);
+      const countlikes = await network.get(`/api/song/${id}/count-likes`);
       console.log(countlikes);
       setSumLikes(countlikes.data[0].countLikes);
       const fullDate = new Date(data[0].createdAt).getFullYear() +
@@ -62,7 +63,7 @@ useEffect(() => {
 const onLike = async() => {
   if(likeButton === like_logo){
     try {
-      await axios.post(`/api/song_likes`, {
+      await network.post(`/api/song_likes`, {
         "user_id": 1,
         "song_id": parseInt(location.pathname.split("/")[3])
       })
@@ -72,7 +73,7 @@ const onLike = async() => {
     }
   } else {
     try {
-      await axios.delete(`/api/song_likes/1/${location.pathname.split("/")[3]}`)
+      await network.delete(`/api/song_likes/1/${location.pathname.split("/")[3]}`)
       setLikeButton(like_logo);
     } catch (error) {
       console.log(error);

@@ -5,6 +5,7 @@ import TitleBlock from '../shared_components/TitleBlock/TitleBlock';
 import SongRow from '../shared_components/songRow/SongRow';
 import SquareRow from '../shared_components/SqaureRow/SquareRow';
 import axios from 'axios';
+import network from '../../services/network';
 
 function ArtistPage() {
     const [location, setLocation] = useState(useLocation().pathname.split('/'));
@@ -14,7 +15,7 @@ function ArtistPage() {
         (async () => {
           try {
             console.log(location)
-            const { data } = await axios.get(`/api/artist/${location[3]}/list-of-songs`);
+            const { data } = await network.get(`/api/artist/${location[3]}/list-of-songs`);
             console.log();
             setListOfSongs(data );
           } catch (error) {

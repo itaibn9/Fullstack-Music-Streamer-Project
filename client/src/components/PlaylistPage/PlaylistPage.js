@@ -4,6 +4,7 @@ import { useLocation  } from "react-router-dom";
 import TitleBlock from '../shared_components/TitleBlock/TitleBlock';
 import SongRow from '../shared_components/songRow/SongRow';
 import axios from 'axios';
+import network from '../../services/network';
 
 function PlaylistPage() {
     const [location, setLocation] = useState(useLocation().pathname.split('/'));
@@ -12,7 +13,7 @@ function PlaylistPage() {
     useEffect(() => {
         (async () => {
           try {
-            const { data } = await axios.get(`/api/playlist/${location[3]}/list-of-songs`);
+            const { data } = await network.get(`/api/playlist/${location[3]}/list-of-songs`);
             setListOfSongs(data);
           } catch (error) {
             console.log(error);

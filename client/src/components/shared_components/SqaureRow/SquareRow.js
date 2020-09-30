@@ -3,6 +3,7 @@ import Carousel from 'react-elastic-carousel';
 import { Link ,useLocation } from "react-router-dom";
 import axios from 'axios';
 import './SquareRow.css';
+import network from '../../../services/network';
 
 function SquareRow({table, page, searchBy}) {
   const [location, setLocation] = useState(useLocation().pathname.split('/'));
@@ -22,17 +23,17 @@ function SquareRow({table, page, searchBy}) {
           try {
             console.log(location[3]);
             if(location[2]==='artist'){
-              const {data} = await axios.get(`/api/${table}/${location[3]}/list-of-albums`);
+              const {data} = await network.get(`/api/${table}/${location[3]}/list-of-albums`);
               console.log(data[0]);
               setDetails(data)
             } else if(searchQuery!==undefined&&searchBy!==""){
               console.log(`------------------------------${table}---------------------------${searchQuery}-----`)
-              const { data } = await axios.get(`/api/${table}/search/${searchQuery}`);
+              const { data } = await network.get(`/api/${table}/search/${searchQuery}`);
               console.log(data);
               setDetails(data);
               setLetterCounter(1)
             } else {
-              const { data } = await axios.get(`/api/${table}/top/`);
+              const { data } = await network.get(`/api/${table}/top/`);
               setDetails(data);
               console.log(data);
             }
