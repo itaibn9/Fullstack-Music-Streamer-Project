@@ -1,13 +1,17 @@
 import React, { useState, useContext, useEffect } from 'react';
 import { Link } from "react-router-dom";
-import  UserContext  from "../UserContext";
+import  { UserContext }  from "../../services/UserContext";
 import network from '../../services/network';
 import { Mix } from '../../services/AnalyticsManager';
 
 
 
-export default () => {
-  const { email, setEmail } = useContext(UserContext)
+
+
+function LoginPage() {
+  console.log(UserContext);
+  const {userName, setUsername} = useContext(UserContext);
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('')
   const [error, setError] = useState('')
   useEffect(() => {
@@ -20,7 +24,8 @@ export default () => {
     });
     if (response.data && response.data.success && response.data.token) {
       localStorage.setItem('token', response.data.token);
-      console.log(response.data);
+      console.log(response.data.name);
+      setUsername(response.data.name);
       window.location = '/';
     } else {
       console.log(response.response.data.errorMessage)
@@ -35,7 +40,7 @@ export default () => {
       <input value={email} onChange={({ target: { value } }) => setEmail(value)} />
       </label>
       <label>Password: 
-      <input value={password} onChange={({ target: { value } }) => setPassword(value)} />
+      <input value={password} placeholder="Password" type="password" onChange={({ target: { value } }) => setPassword(value)} />
       </label>
       <button onClick={onSubmit}>Login</button>
       <div> Not signed in yet? click <Link  to="/api/register">here</Link> to sign up.</div>
@@ -43,3 +48,4 @@ export default () => {
     </div>
   )
 }
+export default LoginPage;

@@ -1,4 +1,4 @@
-import React,{ useState, useMemo } from 'react';
+import React,{ useState, useMemo, useEffect } from 'react';
 import './App.css';
 import SongPage from './components/SongPage/SongPage';
 import { BrowserRouter as Router, Route, Switch, Redirect} from "react-router-dom";
@@ -13,15 +13,16 @@ import AddPage from './components/AddPage/AddPage';
 import LoginPage from './components/LoginPage/LoginPage';
 import RegisterPage from './components/LoginPage/RegisterPage';
 import { isLogin } from './services/index';
-import  UserContext  from "./components/UserContext";
+import  { UserContext }  from "./services/UserContext";
+
+// export const UserContext = React.createContext();
 
 function App() {
-  const [email ,setEmail] = useState('');
-  const value = useMemo(() => ({ email, setEmail }), [email, setEmail]);
-console.log(email);
+  const [username ,setUsername] = useState('Guest');
+  useEffect(() => {console.log(username);}, [])
   return (
     <Router >
-      <UserContext.Provider value={value}>
+        <UserContext.Provider value={{ username, setUsername }}>
       {isLogin() && 
       <NavBar /> 
       }
@@ -39,10 +40,11 @@ console.log(email);
       </Switch>
       : 
       <Switch>
-      <Route exact path="/">
+      <Route exact path="/api/login">
       <LoginPage />
       </Route>
       <Route path="/api/register"><RegisterPage /></Route>
+      <Redirect from='*' to='/api/login' />
       </Switch>
     }
     </UserContext.Provider>

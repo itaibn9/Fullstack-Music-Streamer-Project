@@ -4,18 +4,18 @@ import logo from './gitaure.png';
 import './navbar.css';
 import person from './person.png';
 import { logout } from '../../services/index';
-import UserContext from '../UserContext';
+import { UserContext } from '../../services/UserContext';
 require('dotenv').config();
 
 const notSafePassword = process.env.REACT_APP_ADMINPASSWORD;
 function NavBar() {
   const [admin, setAdmin] = useState(false);
-  const { userEmail } = useContext(UserContext);
+  const {userName, setUsername} = useContext(UserContext);
 
-  console.log(userEmail);
+  console.log(userName);
   const logoutFunc = async () => {
     logout();
-    window.location = '/';
+    window.location = '/api/login';
     
   }
 
@@ -49,7 +49,7 @@ function NavBar() {
                 <button onClick={() => logoutFunc()}>Logout</button>
                 <Link  className="navbar__links navbar__links--end" to="/api/profile">
                 <img className="navbar__logo" src={person} alt="person-logo"></img>
-              <pre>{JSON.stringify(userEmail, null, 2)}</pre>
+              <div>{userName}</div>
                     </Link>
                     </div>
         </nav>
