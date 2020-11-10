@@ -7,13 +7,11 @@
 }
 
 .homePage__Welcome {
-  width: 100%;
   font-family: "Righteous", cursive;
   font-size: 2rem;
   font-weight: 300;
   color: white;
   text-align: center;
-  padding-left: 500px;
   padding-top: 150px;
 }
 
@@ -28,6 +26,9 @@
 }
 
 h1 {
+  display: inline-block;
   margin-bottom: 100px;
+  width: 100% !important;
+  font-size: 5rem;
 }
 /*# sourceMappingURL=HomePage.css.map */

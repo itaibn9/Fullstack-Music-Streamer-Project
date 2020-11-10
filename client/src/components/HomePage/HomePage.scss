@@ -5,10 +5,8 @@
 
     background-color: $background-color;
     &__Welcome{
-        width: 100%;
         @include details-text;
         text-align: center;
-        padding-left: 500px;
         padding-top: 150px;
     }
     &__topTen{
@@ -19,6 +17,10 @@
     }
 }
 h1{
+    display: inline-block;
    margin-bottom: 100px;
+   width: 100% !important;
+   font-size: 5rem;
+
 }
 

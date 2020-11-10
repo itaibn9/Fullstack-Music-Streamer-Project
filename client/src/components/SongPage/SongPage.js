@@ -122,12 +122,13 @@ const refresh = () => {
           </div>
         </div>
         <div className="songPage__rightBlock">
-          <h2 className="relatedSongHeader">Related Songs</h2>
         { relatedSongs[0]===undefined ? <h1 className="relatedSongHeader">No songs related to this song</h1> :
-            relatedSongs.map((song) =>
+        ( <>
+          <h2 className="relatedSongHeader">Related Songs</h2>
+            {relatedSongs.map((song) =>
             <SongRow key={song.name} name={song.name} length={song.length} artist={song.Artist.artist_name}
              songID={song.id} type={location.search.split('?')[1].split('=')[0]}
-              typeID={location.search.split('?')[1].split('=')[1]} refresh={refresh} />)  }
+              typeID={location.search.split('?')[1].split('=')[1]} refresh={refresh} />)} </> )}
         </div>
       </div>
     );
