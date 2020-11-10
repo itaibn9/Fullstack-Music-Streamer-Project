@@ -1,15 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import SquareRow from '../shared_components/SqaureRow/SquareRow';
 import './SearchPage.css';
+import { Mix } from '../../services/AnalyticsManager';
 function SearchPage() {
-const [searchInput, setSearchInput] = useState("");
+    const [searchInput, setSearchInput] = useState("");
+        useEffect(() => {
+          Mix.track('Search Somthing');
+        }, [])
 
     const filterBySearch = (title) => {
         setSearchInput(title);
       };
-
-
-
 
     return (
         <div className="searchPage">

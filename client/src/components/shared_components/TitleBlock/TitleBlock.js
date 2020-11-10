@@ -5,6 +5,7 @@ import disLike_logo from './dislike.png';
 import { useLocation  } from "react-router-dom";
 import axios from 'axios';
 import network from '../../../services/network';
+import { Mix } from '../../../services/AnalyticsManager';
 
 
 function TitleBlock() {
@@ -23,6 +24,7 @@ function TitleBlock() {
                   "user_id": 1,
                   "artist_id": parseInt(location[3])
                 })
+                Mix.track('Like Artist');
                 setLikeButton(disLike_logo);
               break;
             case "playlist":
@@ -30,6 +32,7 @@ function TitleBlock() {
                 "user_id": 1,
                 "playlist_id": parseInt(location[3])
               })
+              Mix.track('Like Playlist');
               setLikeButton(disLike_logo);
               break;
             case "album":
@@ -37,6 +40,7 @@ function TitleBlock() {
                 "user_id": 1,
                 "album_id": parseInt(location[3])
               })
+              Mix.track('Like Album');
               setLikeButton(disLike_logo);
               break;
           }

@@ -2,13 +2,16 @@ import React, { useState, useEffect } from 'react';
 import './AlbumPage.css';
 import TitleBlock from '../shared_components/TitleBlock/TitleBlock';
 import SongRow from '../shared_components/songRow/SongRow';
-import axios from 'axios';
 import { useLocation  } from "react-router-dom";
 import network from '../../services/network';
+import { Mix } from '../../services/AnalyticsManager';
 
 function AlbumPage() {
-    const [location, setLocation] = useState(useLocation().pathname.split('/'));
-    const [listOfSongs, setListOfSongs] = useState([]);
+  const [location, setLocation] = useState(useLocation().pathname.split('/'));
+  const [listOfSongs, setListOfSongs] = useState([]);
+      useEffect(() => {
+        Mix.track('Album play');
+      }, [])
 
     useEffect(() => {
         (async () => {

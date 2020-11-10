@@ -1,7 +1,11 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import SquareRow from '../shared_components/SqaureRow/SquareRow';
 import './HomePage.css';
+import { Mix } from '../../services/AnalyticsManager';
 function HomePage() {
+  useEffect(() => {
+    Mix.track('App launched',{"Changed page": "Home Page"});
+  }, [])
   return (
 <div className="homePage">
     <div className="homePage__Welcome">

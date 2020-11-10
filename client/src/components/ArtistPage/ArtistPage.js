@@ -4,12 +4,15 @@ import { useLocation  } from "react-router-dom";
 import TitleBlock from '../shared_components/TitleBlock/TitleBlock';
 import SongRow from '../shared_components/songRow/SongRow';
 import SquareRow from '../shared_components/SqaureRow/SquareRow';
-import axios from 'axios';
 import network from '../../services/network';
+import { Mix } from '../../services/AnalyticsManager';
 
 function ArtistPage() {
-    const [location, setLocation] = useState(useLocation().pathname.split('/'));
-    const [listOfSongs, setListOfSongs] = useState([]);
+  const [location, setLocation] = useState(useLocation().pathname.split('/'));
+  const [listOfSongs, setListOfSongs] = useState([]);
+      useEffect(() => {
+        Mix.track('App launched',{"Changed page": "Artist Page"});
+      }, [])
 
     useEffect(() => {
         (async () => {

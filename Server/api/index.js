@@ -1,7 +1,6 @@
 const { Router } = require('express');
 const checkToken = require('../middleware/authentication');
 const router = Router();
-const chacktoken = require('../middleware/authentication');
 
 router.use('/login', require('./login'));
 

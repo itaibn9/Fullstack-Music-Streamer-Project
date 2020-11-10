@@ -3,10 +3,10 @@ import Youtube from 'react-youtube';
 import { useParams, useLocation } from "react-router-dom";
 import './SongPage.css';
 import SongRow from '../shared_components/songRow/SongRow';
-import axios from 'axios';
 import like_logo from '../shared_components/songRow/like_logo.png';
 import disLike_logo from '../shared_components/TitleBlock/dislike.png';
 import network from '../../services/network';
+import { Mix } from '../../services/AnalyticsManager';
 
 const opts = {
     height: '390',
@@ -26,6 +26,9 @@ function SongPage() {
   const [artistName, setArtistName] = useState()
   const [sumlikes, setSumLikes] = useState();
   const [likeButton, setLikeButton] = useState(like_logo);
+  useEffect(() => {
+    Mix.track('Play Song');
+  }, [])
   const onReady = (event) => {
     event.target.pauseVideo();
   }
@@ -67,6 +70,7 @@ const onLike = async() => {
         "user_id": 1,
         "song_id": parseInt(location.pathname.split("/")[3])
       })
+      Mix.track('Like Song');
       setLikeButton(disLike_logo);
     } catch (error) {
       console.log(error)
