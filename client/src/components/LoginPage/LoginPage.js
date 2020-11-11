@@ -18,13 +18,14 @@ function LoginPage() {
     Mix.track('App launched');
   }, [])
   const onSubmit = async () => {
-    const response = await network.post('/api/login', {
+    const response = await network.post('/api/user/login', {
       email,
       password
     });
-    if (response.data && response.data.success && response.data.token) {
-      localStorage.setItem('token', response.data.token);
-      console.log(response.data.name);
+    console.log(response.data);
+    if (response.data && response.data.success && response.data.accessToken) {
+      console.log(response);
+      localStorage.setItem('token', response.data.accessToken);
       setUsername(response.data.name);
       window.location = '/';
     } else {

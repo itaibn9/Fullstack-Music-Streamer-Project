@@ -11,7 +11,7 @@ export default () => {
 
   const onSubmit = async () => {
 
-    const response = await axios.post('/api/user', {
+    const response = await axios.post('/api/user/register', {
       name,
       email,
       password
@@ -39,7 +39,7 @@ export default () => {
       <label>Password: 
       <input value={password} onChange={({ target: { value } }) => setPassword(value)} />
       </label>
-      <button onClick={onSubmit}>Sign In</button>
+      <button onClick={onSubmit}>Sign Up</button>
       {error ? <div>*{error}</div> : null}
     </div>
   )

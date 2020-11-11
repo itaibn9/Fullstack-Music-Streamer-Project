@@ -2,8 +2,6 @@ const { Router } = require('express');
 const checkToken = require('../middleware/authentication');
 const router = Router();
 
-router.use('/login', require('./login'));
-
 router.use('/song', checkToken, require('./song'));
 router.use('/album', checkToken, require('./album'));
 router.use('/artist', checkToken, require('./artist'));
