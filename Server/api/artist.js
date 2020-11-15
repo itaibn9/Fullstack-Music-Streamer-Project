@@ -3,6 +3,38 @@ const { Artist, Song, Album, Sequelize, artist_likes } = require('../models');
 const topLimit = 20;
 const { Op } = require("sequelize");
 const router = Router();
+require('dotenv').config();
+
+const { Client } = require("@elastic/elasticsearch");
+
+const client = new Client({
+  cloud: {
+    id: process.env.CLOUD_ID
+  },
+  auth: {
+    username: process.env.SEARCH_USER,
+    password: process.env.SEARCH_PASSWORD
+  }
+});
+
+router.get("/search/:searchInput", async (req, res) => {
+  const search = req.params.searchInput;  
+  try {
+    const { body }  = await client.search({
+      index: "artist",
+      body: {
+        query: {
+          wildcard: { artist_name: `*${search}*`},
+        },
+      },
+    });
+    let results = body.hits.hits.map((artist) => artist._source);
+    res.json(results);
+  } catch (err) {
+    res.json(err.message);
+  }
+})
+
 
 router.get('/top/', async (req, res) => {
   const allArtists = await Artist.findAll({

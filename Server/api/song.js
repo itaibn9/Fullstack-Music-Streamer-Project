@@ -34,6 +34,23 @@ router.get("/", async (req, res) => {
   }
 });
 
+router.get("/search/:searchInput", async (req, res) => {
+  const search = req.params.searchInput;  
+  try {
+    const { body }  = await client.search({
+      index: "song",
+      body: {
+        query: {
+          wildcard: { song_name: `*${search}*`},
+        },
+      },
+    });
+    let results = body.hits.hits.map((song) => song._source);
+    res.json(results);
+  } catch (err) {
+    res.json(err.message);
+  }
+})
 router.get('/top/', async (req, res) => {
   const allSongs = await Song.findAll({
     attributes: ['id', ['song_name', 'name'], 'cover_img'],
@@ -69,30 +86,6 @@ router.get('/:songId', async (req, res) => {
   res.json(song);
 })
 
-// router.get("/search/:searchInput", async (req, res) => {
-//   const search = req.query.searchInput;
-  
-//   try {
-//     const songs = await client.search({
-//       index: "song",
-//       body: {
-//         query: {
-//           wildcard: {
-//             song_name: {
-//               value: `*${search}`,
-//             },
-//           },
-//         },
-//       },
-//     });
-//     let results = songs.body.hits.hits.map((song) => {
-//       return {id: song._source.id, name: song._source.title, artistId: song._source.artistId}
-//   })
-//     res.json(results);
-//   } catch (err) {
-//     res.json(err.message);
-//   }
-// })
 
 // router.get('/search/:searchInput', async (req, res) => {
 //   const searchResults = await Song.findAll({
