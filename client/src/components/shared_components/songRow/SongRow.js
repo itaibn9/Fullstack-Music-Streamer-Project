@@ -20,4 +20,4 @@ console.log(type);
     )
 }
 
-export default SongRow;
+export default React.memo(SongRow);

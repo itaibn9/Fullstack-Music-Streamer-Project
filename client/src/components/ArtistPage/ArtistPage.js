@@ -42,4 +42,4 @@ function ArtistPage() {
     )
 }
 
-export default ArtistPage;
+export default React.memo(ArtistPage);

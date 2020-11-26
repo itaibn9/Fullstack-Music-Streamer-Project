@@ -1,6 +1,6 @@
 import React, { useState, useContext, useEffect } from 'react';
 import { Link } from "react-router-dom";
-import  { UserContext }  from "../../services/UserContext";
+import UserContext from "../../services/UserContext";
 import network from '../../services/network';
 import { Mix } from '../../services/AnalyticsManager';
 import {Avatar, Button, CssBaseline, TextField, FormControlLabel, Checkbox, Grid, Box, Typography} from '@material-ui/core';
@@ -32,9 +32,7 @@ const useStyles = makeStyles((theme) => ({
 
 function LoginPage() {
   const classes = useStyles();
-
-  console.log(UserContext);
-  const {userName, setUsername} = useContext(UserContext);
+  const {setUsername} = useContext(UserContext);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('')
   const [error, setError] = useState('')

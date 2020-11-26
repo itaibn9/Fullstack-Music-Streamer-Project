@@ -54,4 +54,4 @@ function SquareRow({table, page, searchBy}) {
     )
 }
 
-export default SquareRow;
+export default React.memo(SquareRow);

@@ -104,4 +104,4 @@ function TitleBlock() {
     )
 }
 
-export default TitleBlock;
+export default React.memo(TitleBlock);

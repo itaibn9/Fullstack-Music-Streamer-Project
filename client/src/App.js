@@ -13,7 +13,7 @@ import AddPage from './components/AddPage/AddPage';
 import LoginPage from './components/LoginPage/LoginPage';
 import RegisterPage from './components/LoginPage/RegisterPage';
 import { isLogin } from './services/index';
-import  { UserContext }  from "./services/UserContext";
+import  UserContext  from "./services/UserContext";
 
 // export const UserContext = React.createContext();
 
@@ -21,10 +21,13 @@ function App() {
   const [username ,setUsername] = useState('Guest');
   useEffect(() => {console.log(username);}, [])
   return (
+    <UserContext.Provider value={{
+      name: username,
+      setUsername: setUsername,
+    }}>
     <Router >
-        <UserContext.Provider value={{ username, setUsername }}>
       {isLogin() && 
-      <NavBar /> 
+      <NavBar username={username}/> 
       }
       {isLogin() ? 
     <Switch>
@@ -36,7 +39,7 @@ function App() {
         <Route path="/api/search"><SearchPage /></Route>
         <Route path="/api/add"><AddPage /></Route>
         <Route path='/404' component={NotFoundPage} />
-        <Redirect from='*' to='/404' /> 
+        {/* <Redirect from='*' to='/404' />  */}
       </Switch>
       : 
       <Switch>
@@ -47,8 +50,8 @@ function App() {
       <Redirect from='*' to='/api/login' />
       </Switch>
     }
-    </UserContext.Provider>
     </Router>
+    </UserContext.Provider>
   );
 }
 

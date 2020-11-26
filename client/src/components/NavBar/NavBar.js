@@ -4,15 +4,15 @@ import logo from './gitaure.png';
 import './navbar.css';
 import person from './person.png';
 import { logout } from '../../services/index';
-import { UserContext } from '../../services/UserContext';
+import UserContext from '../../services/UserContext';
 require('dotenv').config();
 
 const notSafePassword = process.env.REACT_APP_ADMINPASSWORD;
-function NavBar() {
+function NavBar({ username }) {
   const [admin, setAdmin] = useState(false);
-  const {userName, setUsername} = useContext(UserContext);
+  // const {name} = useContext(UserContext);
 
-  console.log(userName);
+  console.log(username);
   const logoutFunc = async () => {
     logout();
     window.location = '/api/login';
@@ -49,11 +49,11 @@ function NavBar() {
                 <button onClick={() => logoutFunc()}>Logout</button>
                 <Link  className="navbar__links navbar__links--end" to="/api/profile">
                 <img className="navbar__logo" src={person} alt="person-logo"></img>
-              <div>{userName}</div>
+              <div>{username}</div>
                     </Link>
                     </div>
         </nav>
   );
 }
 
-export default NavBar;
+export default React.memo(NavBar);
