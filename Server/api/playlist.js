@@ -1,6 +1,5 @@
 const { Router } = require('express');
 const { Op } = require("sequelize");
-const { Playlist, Song_Playlist_interaction, Song, Artist, playlist_likes, Sequelize } = require('../models');
 const topLimit = 20;
 const router = Router();
 
