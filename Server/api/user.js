@@ -6,15 +6,15 @@ const { Op } = require("sequelize");
 const router = Router();
 
 router.post('/register', async (req, res) => {
-  if(!req.body.email || !req.body.name || !req.body.password) {
-    res.status(403).send("Fill properly")
+  try { 
+    if(!req.body.email || !req.body.name || !req.body.password) {
+      res.status(403).send("Fill properly")
     }
     const userCheck = await User.findOne({
       where:{'email':{[Op.eq]: req.body.email}}
     });
     console.log(userCheck);
-  if(userCheck) return res.status(409).send("user already exists");
-  try { 
+    if(userCheck) return res.status(409).send("user already exists");
     req.body.password = await hashingFunc(req.body.password);
     const user = {email: req.body.email , name: req.body.name, password: req.body.password};
     await User.create(user);
