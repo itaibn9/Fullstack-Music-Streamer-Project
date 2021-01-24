@@ -5,20 +5,21 @@
 .songPage {
   display: -ms-grid;
   display: grid;
-  -ms-grid-columns: 3fr 2fr;
-      grid-template-columns: 3fr 2fr;
+  -ms-grid-rows: 1fr 1fr;
+      grid-template-rows: 1fr 1fr;
   background-color: #1E1D1D;
-  height: 130vh;
+  height: 100vh;
+  width: 100vw;
 }
 
 .songPage__song {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-orient: vertical;
+  -webkit-box-orient: horizontal;
   -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
+      -ms-flex-direction: row;
+          flex-direction: row;
   -webkit-box-pack: space-evenly;
       -ms-flex-pack: space-evenly;
           justify-content: space-evenly;
@@ -33,6 +34,8 @@
   font-size: 2rem;
   font-weight: 300;
   color: white;
+  font-size: 20px;
+  padding-top: 30px;
 }
 
 .songPage__rightBlock {
@@ -75,12 +78,29 @@
   top: 2rem;
 }
 
-.songPage button {
-  background: none;
-  border: none;
+.lyricButton {
+  width: 100px;
+  height: 20px;
+  background: #f3f0f1;
+  position: relative;
+  background: #f3f0f1;
+  margin-bottom: 25px;
+  border-radius: 32px;
+  text-align: center;
+  cursor: pointer;
+  -webkit-transition: all 0.1s ease-in-out;
+  transition: all 0.1s ease-in-out;
 }
 
-.songPage button:hover {
-  cursor: pointer;
+.lyricButton span {
+  font-family: "Righteous", cursive;
+}
+
+.relatedSongHeader {
+  font-family: "Righteous", cursive;
+  font-size: 2rem;
+  font-weight: 300;
+  color: white;
+  text-align: center;
 }
 /*# sourceMappingURL=songPage.css.map */

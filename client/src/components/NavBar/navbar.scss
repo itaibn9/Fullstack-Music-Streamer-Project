@@ -1,5 +1,5 @@
 @import '../../variables';
-@import '../../mixins';
+@import '../../mixin';
 
 .navbar{
     background-color: $block-color-primary;
@@ -7,7 +7,6 @@
     min-width:165px;
     width: 100%;
     position: absolute;
-    white-space: nowrap;
     @include flex(row, space-between,center);
     &__container{
         @include flex(row, center, center);
@@ -20,7 +19,7 @@
         @include details-text;
     }
 
-    p{  
+    pre{  
         @include details-text;
         width: min-content;
         margin-left: 3rem;

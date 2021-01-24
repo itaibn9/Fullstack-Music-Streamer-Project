@@ -1,0 +1,11 @@
+@import '../../variables';
+@import '../../mixin';
+
+.main{
+    display: grid;
+    grid-template-rows: 2fr 5fr;
+}
+.secondaryNavBar{
+    padding-top: 120px;
+}
+

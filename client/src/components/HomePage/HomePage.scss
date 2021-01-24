@@ -1,20 +1,26 @@
 @import '../../variables';
-@import '../../mixins';
+@import '../../mixin';
 
 .homePage{
-    display: grid;
-    grid-template-rows: 1fr 3fr 3fr 3fr 3fr;
+
     background-color: $background-color;
     &__Welcome{
-        width: 100%;
         @include details-text;
         text-align: center;
-        margin-top: 35px;
+        padding-top: 150px;
     }
     &__topTen{
         width: 100%;
         @include details-text;
         background-color: $block-color-secondary;
+        padding-bottom: 80px;
     }
+}
+h1{
+    display: inline-block;
+   margin-bottom: 100px;
+   width: 100% !important;
+   font-size: 5rem;
+
 }
 

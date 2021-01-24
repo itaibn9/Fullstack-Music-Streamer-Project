@@ -1,5 +1,5 @@
 @import '../../variables';
-@import '../../mixins';
+@import '../../mixin';
 
 .playlistPage{
     background-color: $block-color-secondary;
@@ -7,4 +7,7 @@
     display: grid;
     grid-template-rows: 1fr 2fr;
     @include flex(column, flex-start, center);
+}
+.list_of_songs{
+    display: contents;
 }

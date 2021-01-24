@@ -23,4 +23,8 @@
       -ms-flex-align: center;
           align-items: center;
 }
+
+.list_of_songs {
+  display: contents;
+}
 /*# sourceMappingURL=PlaylistPage.css.map */

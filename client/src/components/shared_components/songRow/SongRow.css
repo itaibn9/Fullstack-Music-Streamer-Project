@@ -3,25 +3,16 @@
 @import url("https://fonts.googleapis.com/css2?family=Righteous&display=swap");
 @import url(//db.onlinewebfonts.com/c/4aa3e37e571255737e5e6d4e9d9770a5?family=Rockwell);
 .songRow {
-  background-color: #131010;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: row;
-          flex-direction: row;
-  -webkit-box-pack: space-evenly;
-      -ms-flex-pack: space-evenly;
-          justify-content: space-evenly;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 1fr 2fr 2fr 0.2fr 1fr;
+      grid-template-columns: 1fr 2fr 2fr 0.2fr 1fr;
   width: 100%;
   font-family: "Righteous", cursive;
   font-size: 1rem;
   font-weight: 100;
   color: white;
+  text-align: center;
 }
 
 p {
@@ -29,5 +20,16 @@ p {
   font-size: 2rem;
   font-weight: 300;
   color: white;
+  font-size: 1rem;
+  text-align: center;
+}
+
+.control__logo {
+  -webkit-box-sizing: content-box;
+          box-sizing: content-box;
+  height: 20px;
+  width: 20px;
+  border-radius: 100px;
+  padding: 5px;
 }
 /*# sourceMappingURL=SongRow.css.map */

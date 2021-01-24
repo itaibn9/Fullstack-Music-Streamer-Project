@@ -1,0 +1,14 @@
+@import '../../../variables';
+@import '../../../mixin';
+.SquareRow{  
+box-sizing: content-box;
+height: 200px;
+width: 100%;
+
+}
+.square_img {
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 5px;
+    width: 150px;
+  }

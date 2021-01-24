@@ -7,13 +7,6 @@
     color:$text-color;
   }  
 
-@mixin headline-text {
-    
-}
-
-@mixin description-text() {
-    
-}
 
 @mixin flex($direction, $justify, $align) {
     display: flex;

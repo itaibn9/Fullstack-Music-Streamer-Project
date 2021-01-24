@@ -1,18 +1,20 @@
 @import '../../variables';
-@import '../../mixins';
+@import '../../mixin';
 
 .songPage{
     display: grid;
-    grid-template-columns: 3fr 2fr;
+    grid-template-rows: 1fr 1fr;
     background-color: $background-color;
-    height: 130vh;
+    height: 100vh;
+    width: 100vw;
     &__song{
-      
-      @include flex(column, space-evenly, center);
+      @include flex(row, space-evenly, center);
     }
     &__Info{
       width: 50%;
       @include details-text;
+      font-size: 20px;
+      padding-top: 30px;
     }
     &__rightBlock{
     
@@ -28,13 +30,26 @@
       position: relative;
       top:2rem;
     }
-    button{
-      &:hover{
-        cursor: pointer;
+  }
+    .lyricButton {
+      width: 100px;
+      height: 20px;
+      background: #f3f0f1;
+      position: relative;
+      background: #f3f0f1;
+      margin-bottom: 25px;
+      border-radius: 32px;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.1s ease-in-out;   
+      span{
+        font-family: $font-details;
       }
-      background: none;
-      border: none;
-    }
+  }
+
+.relatedSongHeader{
+  @include details-text;
+  text-align: center;
 }
 
 

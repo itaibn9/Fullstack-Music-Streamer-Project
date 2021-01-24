@@ -8,7 +8,6 @@
   min-width: 165px;
   width: 100%;
   position: absolute;
-  white-space: nowrap;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -63,7 +62,7 @@
   color: white;
 }
 
-.navbar p {
+.navbar pre {
   font-family: "Righteous", cursive;
   font-size: 2rem;
   font-weight: 300;
