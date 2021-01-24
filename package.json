@@ -1,0 +1,25 @@
+{
+  "name": "fullstack-streamer",
+  "version": "1.0.0",
+  "description": "",
+  "engines": {
+    "node": "14.7.0"
+  },
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "server": "cd server && npm install && npm start",
+    "start": "npm run server"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/itaibn9/Fullstack-Music-Streamer-Project.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/itaibn9/Fullstack-Music-Streamer-Project/issues"
+  },
+  "homepage": "https://github.com/itaibn9/Fullstack-Music-Streamer-Project#readme"
+}
