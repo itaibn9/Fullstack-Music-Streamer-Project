@@ -8,7 +8,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "server": "cd server && npm install && npm start",
+    "server": "cd Server && npm install && npm start",
     "start": "npm run server"
   },
   "repository": {
