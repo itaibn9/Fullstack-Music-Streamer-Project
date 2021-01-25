@@ -19,7 +19,7 @@ module.exports = {
     "username": process.env.USER,
     "password": process.env.PASSWORD,
     "database": process.env.PRODDATABASE,
-    "host": "127.0.0.1",
+    "host": "esilxl0nthgloe1y.chr7pe7iynqr.eu-west-1.rds.amazonaws.com",
     "dialect": "mysql"
   }
 }
