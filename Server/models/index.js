@@ -3,6 +3,8 @@
 const fs = require('fs');
 const path = require('path');
 const Sequelize = require('sequelize');
+const env = process.env.NODE_ENV || 'development';
+
 const basename = path.basename(__filename);
 
 const config = require(__dirname + '/../config/config.js')[env];
@@ -12,8 +14,6 @@ let sequelize;
 if (process.env.JAWSDB_URL) {
   sequelize = new Sequelize(process.env.AWSDB_URL, {});
 } else {
-  const env = process.env.NODE_ENV || 'development';
-  const config = path.resolve(__dirname, "..", "config", "config.json")[env];
   sequelize = new Sequelize(config.database, config.username, config.password, config);
 }
 
