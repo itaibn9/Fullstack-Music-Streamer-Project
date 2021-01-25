@@ -19,7 +19,7 @@ module.exports = {
     "username": process.env.USER,
     "password": process.env.PASSWORD,
     "database": process.env.PRODDATABASE,
-    "host": "127.0.0.1",
+    "host": "http://barnahor-music-streamer.herokuapp.com/",
     "dialect": "mysql"
   }
 }
