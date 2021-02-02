@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import Carousel from 'react-elastic-carousel';
 import { Link ,useLocation } from "react-router-dom";
-import axios from 'axios';
 import './SquareRow.css';
 import network from '../../../services/network';
 
@@ -10,7 +9,6 @@ function SquareRow({table, page, searchBy}) {
   const [details, setDetails] = useState([]);
   const [searchQuery, setSearchQuery] = useState();
   const [letterCounter, setLetterCounter] = useState(0);
-  console.log(`=====${letterCounter}============${searchQuery}-----------------${searchBy}=================`);
   if(searchBy!==undefined&&searchBy!==""&&searchBy!==searchQuery){
     setSearchQuery(searchBy);
   } else if(letterCounter!==0&&searchBy===searchQuery) {
@@ -35,7 +33,7 @@ function SquareRow({table, page, searchBy}) {
             } else {
               const { data } = await network.get(`/api/${table}/top/`);
               setDetails(data);
-              console.log(data);
+              console.log(`${table}`, data);
             }
           } catch (error) {
             console.log(error);

@@ -5,7 +5,6 @@ const router = Router();
 router.get('/', async (req, res) => {
   try {
   const likes = await song_likes.findAll();
-  console.log(likes);
   res.json(likes);
 } catch (error) {
   res.status(500).send(error);

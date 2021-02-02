@@ -1,29 +1,27 @@
-import React,{ useState, useContext } from 'react';
-import { Link, Redirect } from "react-router-dom";
+import React,{ useState } from 'react';
+import { Link } from "react-router-dom";
 import logo from './gitaure.png';
 import './navbar.css';
 import person from './person.png';
-import { logout } from '../../services/index';
-import UserContext from '../../services/UserContext';
+import { logout } from '../../services/authUtils';
+import { UserContext } from '../../services/UserContext';
 require('dotenv').config();
 
 const notSafePassword = process.env.REACT_APP_ADMINPASSWORD;
-function NavBar({ username }) {
+function NavBar() {
   const [admin, setAdmin] = useState(false);
-  // const {name} = useContext(UserContext);
-
-  console.log(username);
+  const context = React.useContext(UserContext);
+console.log(context)
   const logoutFunc = async () => {
+    context.logUserOut();
     logout();
-    window.location = '/api/login';
-    
   }
 
   const adminValidation = () => {
    const password =  prompt('please enter the password: ');
     if(password === notSafePassword){
       setAdmin(true);
-    }else{
+    } else {
       alert("Wrong Password")
     }
   }
@@ -46,10 +44,12 @@ function NavBar({ username }) {
                 </div>
                 <div className="navbar__container">
                 <div className="navbar__line" />
+                <Link to="/api/login">
                 <button onClick={() => logoutFunc()}>Logout</button>
+                </Link>
                 <Link  className="navbar__links navbar__links--end" to="/api/profile">
                 <img className="navbar__logo" src={person} alt="person-logo"></img>
-              <div>{username}</div>
+              <div>{context.name}</div>
                     </Link>
                     </div>
         </nav>

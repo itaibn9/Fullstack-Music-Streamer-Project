@@ -1,4 +1,4 @@
-import React,{ useState, useMemo, useEffect } from 'react';
+import React,{ useContext, useEffect } from 'react';
 import './App.css';
 import SongPage from './components/SongPage/SongPage';
 import { BrowserRouter as Router, Route, Switch, Redirect} from "react-router-dom";
@@ -12,24 +12,52 @@ import PlaylistPage from './components/PlaylistPage/PlaylistPage';
 import AddPage from './components/AddPage/AddPage';
 import LoginPage from './components/LoginPage/LoginPage';
 import RegisterPage from './components/LoginPage/RegisterPage';
-import { isLogin } from './services/index';
-import  UserContext  from "./services/UserContext";
+import { Logged } from './services/UserContext';
+import  { UserContext }  from "./services/UserContext";
+import Cookies from 'js-cookie';
+import network from './services/network';
+
 
 // export const UserContext = React.createContext();
 
 function App() {
-  const [username ,setUsername] = useState('Guest');
-  useEffect(() => {console.log(username);}, [])
-  return (
-    <UserContext.Provider value={{
-      name: username,
-      setUsername: setUsername,
-    }}>
-    <Router >
-      {isLogin() && 
-      <NavBar username={username}/> 
+  const context = useContext(UserContext);
+  console.log(context);
+  
+  const isLoggedIn = async () => {
+    if (Cookies.get('accessToken')) {
+      try {
+        const { data } = await network.get('/api/user/validateToken');
+        const id = Cookies.get('id');
+        const dataCookie = {
+          id,
+          email: Cookies.get('email'),
+          accessToken: Cookies.get('accessToken'),
+          name: Cookies.get('name'),
+        };
+        context.logUserIn({ ...dataCookie, ...data, success: true });
+        // setLoading(false);
+      } catch (e) {
+        context.logUserIn({ success: false });
+        // setLoading(false);
       }
-      {isLogin() ? 
+    } else {
+      context.logUserIn({ success: false });
+      // setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    isLoggedIn();
+  }, [])
+
+  return (
+    <Logged.Provider value={context.success}>
+    <Router >
+      {context.success && 
+      <NavBar /> 
+      }
+      {context.success ? 
     <Switch>
     <Route exact={true} path="/" render={() => <HomePage />}></Route>
         <Route path="/api/song/:id" render={() => <SongPage />}></Route>
@@ -39,7 +67,7 @@ function App() {
         <Route path="/api/search"><SearchPage /></Route>
         <Route path="/api/add"><AddPage /></Route>
         <Route path='/404' component={NotFoundPage} />
-        {/* <Redirect from='*' to='/404' />  */}
+        {/* <Redirect from='*' to='/' />  */}
       </Switch>
       : 
       <Switch>
@@ -47,11 +75,11 @@ function App() {
       <LoginPage />
       </Route>
       <Route path="/api/register"><RegisterPage /></Route>
-      <Redirect from='*' to='/api/login' />
+      {/* <Redirect from='*' to='/api/login' /> */}
       </Switch>
     }
     </Router>
-    </UserContext.Provider>
+    </Logged.Provider>
   );
 }
 

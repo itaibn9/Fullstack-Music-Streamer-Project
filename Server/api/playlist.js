@@ -1,5 +1,6 @@
 const { Router } = require('express');
 const { Op } = require("sequelize");
+const { Playlist, playlist_likes, Song_Playlist_interaction } = require('../models');
 const topLimit = 20;
 const router = Router();
 
@@ -12,6 +13,7 @@ router.get('/top/', async (req, res) => {
   });
   res.json(allPlaylists);
 } catch (error) {
+  console.log(error)
   res.status(500).send(error);
 }
 })
@@ -24,7 +26,6 @@ router.get('/:playlistId/count-likes', async (req, res) => {
       playlist_id: [req.params.playlistId]
     }
   });
-  console.log(countLikes);
   res.json(countLikes);
 } catch (error) {
   res.status(500).send(error);
@@ -46,7 +47,6 @@ router.get('/:playlistId/list-of-songs', async (req, res) => {
     where:{'playlist_id':{[Op.eq]: req.params.playlistId}}
   });
   songsInPlaylist = songsInPlaylist.map((song) => song.Song)
-  console.log(songsInPlaylist);
   res.json(songsInPlaylist);
 } catch (error) {
   res.status(500).send(error);
@@ -74,7 +74,6 @@ router.get('/search/:searchInput', async (req, res) => {
       order: ['likes'],
     limit: topLimit
   });
-  console.log(searchResults);
   res.json(searchResults);
 } catch (error) {
   res.status(500).send(error);

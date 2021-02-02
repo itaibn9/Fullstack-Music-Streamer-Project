@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from "react-router-dom";
 import play_logo from './play_logo.png';
-import like_logo from './like_logo.png';
+// import like_logo from './like_logo.png';
 import './SongRow.css';
 
 function SongRow({name, length, artist, songID, type, typeID, refresh}) {

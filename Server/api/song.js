@@ -12,7 +12,6 @@ router.get('/top/', async (req, res) => {
     order: ['likes'],
     limit: topLimit
   });
-  console.log(allSongs);
   res.json(allSongs);
 } catch (error) {
   res.status(500).send(error);
@@ -27,7 +26,6 @@ router.get('/:songId/count-likes', async (req, res) => {
       song_id: [req.params.songId]
     }
   });
-  console.log(countLikes);
   res.json(countLikes);
 } catch (error) {
   res.status(500).send(error);
@@ -43,7 +41,6 @@ router.get('/:songId', async (req, res) => {
       id: [req.params.songId]
     }
   });
-  console.log(song);
   res.json(song);
 } catch (error) {
   res.status(500).send(error);
@@ -59,7 +56,6 @@ router.get('/search/:searchInput', async (req, res) => {
       order: ['likes'],
     limit: topLimit
   });
-  console.log(searchResults);
   res.json(searchResults);
 } catch (error) {
   res.status(500).send(error);

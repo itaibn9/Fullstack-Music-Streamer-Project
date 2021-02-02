@@ -1,30 +1,17 @@
 let jwt = require('jsonwebtoken');
 
-let checkToken = (req, res, next) => {
-  let token = req.headers['x-access-token'] || req.headers['authorization']; // Express headers are auto converted to lowercase
-  if (token.startsWith('bearer ')) {
-    // Remove Bearer from string
-    token = token.slice(7, token.length);
-  }
-
-  if (token) {
-    jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
-      if (err) {
-        return res.status(401).json({
-          success: false,
-          message: 'Token is not valid'
-        });
-      } else {
-        req.decoded = decoded;
-        next();
-      }
-    });
-  } else {
-    return res.json({
-      success: false,
-      message: 'Auth token is not supplied'
-    });
-  }
+// eslint-disable-next-line import/prefer-default-export
+const checkToken = (req, res, next) => {
+  const authHeader = req.headers.authorization;
+  const token = authHeader && authHeader.split(' ')[1]; // Or undefiend or the access token
+  if (token == null) return res.status(401).send('Access Token Required');
+  jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
+    if (err) {
+      return res.status(408).send('Invalid Access Token'); // you got a token but this is no longer valid
+    }
+    req.body.user = decoded;
+    next();
+  });
 };
 
 module.exports = checkToken

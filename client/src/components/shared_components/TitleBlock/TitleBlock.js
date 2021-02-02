@@ -3,7 +3,6 @@ import './TitleBlock.css';
 import like_logo from '../songRow/like_logo.png';
 import disLike_logo from './dislike.png';
 import { useLocation  } from "react-router-dom";
-import axios from 'axios';
 import network from '../../../services/network';
 import { Mix } from '../../../services/AnalyticsManager';
 
@@ -88,7 +87,7 @@ function TitleBlock() {
             console.log(error);
           }
         })();
-      }, [location]);
+      }, [location, likeButton]);
     return (
         <div className="titleBlock">
             <img className="cover_img" src={titleData.cover_img} alt="wallpaper" />

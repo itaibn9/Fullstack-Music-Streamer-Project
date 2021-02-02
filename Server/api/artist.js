@@ -26,7 +26,6 @@ router.get('/:artistId/list-of-songs', async (req, res) => {
       artistId: [req.params.artistId]
     }
   });
-  console.log(song);
   res.json(song);
 } catch (error) {
   res.status(500).send(error);
@@ -40,7 +39,6 @@ router.get('/:artistId/list-of-albums', async (req, res) => {
     include: [{model:Artist, attributes:[['artist_name', 'name']]}],
     where: {'artistId':{[Op.eq]: req.params.artistId}}
   });
-  console.log(relatedAlbums);
   res.json(relatedAlbums);
 } catch (error) {
   res.status(500).send(error);
@@ -55,7 +53,6 @@ router.get('/:artistId/count-likes', async (req, res) => {
       artist_id: [req.params.artistId]
     }
   });
-  console.log(countLikes);
   res.json(countLikes);
 } catch (error) {
   res.status(500).send(error);
@@ -84,7 +81,6 @@ router.get('/search/:searchInput', async (req, res) => {
       order: ['likes'],
     limit: topLimit
   });
-  console.log(searchResults);
   res.json(searchResults);
 } catch (error) {
   res.status(500).send(error);
